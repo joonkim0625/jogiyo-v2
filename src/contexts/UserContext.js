@@ -12,7 +12,8 @@ export default class UserProvider extends Component {
       logout: this.logout.bind(this),
       register: this.register.bind(this),
 
-      username: '',
+      id: null,
+      username: null,
       password: '',
       passwordConfirm: '',
       phoneNumber: '',
@@ -23,35 +24,29 @@ export default class UserProvider extends Component {
 
   async componentDidMount() {
     // 토큰이 있으면 할 일
-    if (localStorage.getItem('token')) {
-      const {
-        data: {
-          username,
-          password,
-          phoneNumber: phone_number,
-          nickName: nick_name,
-        },
-      } =
-        // username에 해당하는 user 정보 객체를 가져온다.
-        await api.get(`/members/api/${username}/user/`, {
-          params: {
-            username,
-          },
-        });
 
+    if (localStorage.getItem('token')) {
+      await this.refreshUser();
       this.setState({
         isLogin: true,
       });
     }
+    console.log(this.state);
+  }
+
+  async refreshUser() {
+    const res2 = await api.get(`/members/api/user/me/`);
+    console.log(res2.data[0]);
+    this.setState({
+      id: res2.data[0].id,
+      username: res2.data[0].username,
+    });
   }
   // 회원 가입
   async register({ ...value }) {
     const { username, password, phoneNumber, nickName } = value;
-    // 중복 아이디 체크
-    // 사용자 이름 중복체크
-    // 사용자가 입력한 username(이메일 주소)와
-    // DB에서 가져온 모든 user의 username 중 일치하는 데이터가 있을 경우,
-    // 응답으로 온 users의 길이가 0보다 크므로
+
+    // 아마.. 이 db 구조로는 그냥 파람스 없이 요청한 다음에, 그 데이터를 find로 찾아서 매칭하는 아이디가 있는지 없는지를 걸러야 할 듯.
     const { data: users } = await api.get(`/members/api/user`, {
       params: {
         username,
@@ -80,6 +75,7 @@ export default class UserProvider extends Component {
       password,
     });
     localStorage.setItem('token', res.data.token);
+    await this.refreshUser();
     this.setState({
       isLogin: true,
     });
@@ -92,7 +88,7 @@ export default class UserProvider extends Component {
     // 사용자 정보 캐시 초기화
     this.setState({
       isLogin: false,
-      username: '',
+      username: null,
       phoneNumber: '',
       nickName: '',
     });
