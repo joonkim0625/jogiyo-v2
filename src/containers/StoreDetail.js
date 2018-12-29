@@ -38,6 +38,7 @@ export default class StoreDetail extends Component {
       ),
       reviewLength: 0,
     };
+    this.updateReviewLength = this.updateReviewLength.bind(this);
   }
   reviewStar(count) {
     const num = Math.floor(count);
@@ -93,7 +94,7 @@ export default class StoreDetail extends Component {
           id={storeId}
           pullCartItem={this.pullCartItem}
           reviewStar={this.reviewStar.bind(this)}
-          updateReviewLength={this.updateReviewLength.bind(this)}
+          updateReviewLength={this.updateReviewLength}
         />
       </div>
     );
