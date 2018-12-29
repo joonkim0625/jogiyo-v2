@@ -35,6 +35,7 @@ class StoreDetailView extends Component {
     ratingTasteAvg: 0,
     cart: [],
     cartLength: 0,
+    reviewLength: 0,
   };
 
   constructor(props) {
@@ -44,7 +45,7 @@ class StoreDetailView extends Component {
     // page === 'menu' -> 메뉴 정보 페이지
     // page === 'user-review' -> 사용자 리뷰 페이지
     // page === 'store-info' -> 음식점 정보 페이지
-    this.state = { selected: 'menu', infoShow: false };
+    this.state = { selected: 'menu', infoShow: false, review: [] };
     this.handleInfoClick = this.handleInfoClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
@@ -120,6 +121,8 @@ class StoreDetailView extends Component {
       ratingDeliveryAvg,
       ratingQuantityAvg,
       ratingTasteAvg,
+
+      reviewLength,
     } = this.props;
 
     return (
@@ -200,7 +203,7 @@ class StoreDetailView extends Component {
                 this.state.selected === 'user-review' ? 'active' : null
               }
             >
-              클린리뷰 {reviewCount}
+              클린리뷰 {reviewLength}
             </button>
             <button
               onClick={() => this.handleStoreInfoPage()}
@@ -216,6 +219,7 @@ class StoreDetailView extends Component {
                 <Menu storeId={id} pullCartItem={pullCartItem} />
               ) : this.state.selected === 'user-review' ? (
                 <UserReview
+                  updateReviewLength={this.props.updateReviewLength}
                   storeId={id}
                   ownerReplyCount={ownerReplyCount}
                   reviewStar={reviewStar}

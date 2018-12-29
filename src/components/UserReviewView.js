@@ -78,7 +78,7 @@ class UserReviewView extends Component {
         {/* 어떻게 구해야 할까 */}
         <div className="UserReview__count">
           리뷰 <strong>{review.length}</strong>개, 사장님 댓글{' '}
-          <strong>{ownerReplyCount}</strong>개
+          <strong>{ownerReplyCount}</strong>개<button>새 리뷰 작성</button>
         </div>
 
         <div>
@@ -98,7 +98,12 @@ class UserReviewView extends Component {
                     return (
                       <React.Fragment>
                         <button>수정</button>{' '}
-                        <button onClick={e => postDelete(storeId, r.id)}>
+                        <button
+                          onClick={() => {
+                            postDelete(storeId, r.id);
+                            this.props.updateReviewLength();
+                          }}
+                        >
                           삭제
                         </button>
                       </React.Fragment>

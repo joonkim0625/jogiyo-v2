@@ -13,6 +13,7 @@ export default class UserReview extends Component {
       review: [],
       loading: true,
     };
+    this.handlePostDelete = this.handlePostDelete.bind(this);
     this.refreshReview = this.refreshReview.bind(this);
   }
   async componentDidMount() {
@@ -57,9 +58,9 @@ export default class UserReview extends Component {
   async refreshReview() {
     const { storeId } = this.props;
     const res = await api.get(`/restaurants/api/${storeId}/review/`);
-    const review = res.data;
+    console.log(res.data);
     this.setState({
-      review,
+      review: res.data,
       loading: false,
     });
   }
@@ -86,6 +87,8 @@ export default class UserReview extends Component {
     return (
       <div>
         <UserReviewView
+          key={review.length}
+          updateReviewLength={this.props.updateReviewLength}
           storeId={storeId}
           postDelete={this.handlePostDelete}
           timeDiff={this.timeDiff.bind(this)}
