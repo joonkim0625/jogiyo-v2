@@ -13,6 +13,7 @@ export default class UserReview extends Component {
       review: [],
       loading: true,
     };
+    this.refreshReview = this.refreshReview.bind(this);
   }
   async componentDidMount() {
     const { storeId } = this.props;
@@ -53,6 +54,22 @@ export default class UserReview extends Component {
       return posted;
     }
   }
+  async refreshReview() {
+    const { storeId } = this.props;
+    const res = await api.get(`/restaurants/api/${storeId}/review/`);
+    const review = res.data;
+    this.setState({
+      review,
+      loading: false,
+    });
+  }
+
+  async handlePostDelete(storeId, postId) {
+    console.log(typeof storeId);
+    console.log(storeId, postId);
+    await api.delete(`/restaurants/api/${storeId}/review/${postId}/`);
+    await this.refreshReview();
+  }
 
   render() {
     const { review, loading } = this.state;
@@ -63,11 +80,14 @@ export default class UserReview extends Component {
       deliveryAvg,
       quantityAvg,
       tasteAvg,
+      storeId,
     } = this.props;
 
     return (
       <div>
         <UserReviewView
+          storeId={storeId}
+          postDelete={this.handlePostDelete}
           timeDiff={this.timeDiff.bind(this)}
           review={review}
           reviewStar={reviewStar}

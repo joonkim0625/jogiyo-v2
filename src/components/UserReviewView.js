@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './UserReviewView.scss';
 import withLoading from '../hoc/WithLoading';
+import { UserConsumer } from '../contexts/UserContext';
 
 class UserReviewView extends Component {
   static defaultProps = {
@@ -30,6 +31,8 @@ class UserReviewView extends Component {
 
   render() {
     const {
+      storeId,
+      postDelete,
       review,
       ownerReplyCount,
       reviewStar,
@@ -41,7 +44,6 @@ class UserReviewView extends Component {
       user,
     } = this.props;
     console.log(review);
-    console.log(review.menuSummary);
 
     return (
       <div className="UserReview">
@@ -78,6 +80,7 @@ class UserReviewView extends Component {
           리뷰 <strong>{review.length}</strong>개, 사장님 댓글{' '}
           <strong>{ownerReplyCount}</strong>개
         </div>
+
         <div>
           {review.map(r => (
             <div className="UserReview__content" key={r.id}>
@@ -88,6 +91,21 @@ class UserReviewView extends Component {
               <span className="UserReview__content__time">
                 {timeDiff(r.time)}
               </span>
+              <UserConsumer>
+                {/* 유저컨수머에서 아이디 값을 사용해 표현한 버튼 표시 */}
+                {({ id }) => {
+                  if (r.user.id === id) {
+                    return (
+                      <React.Fragment>
+                        <button>수정</button>{' '}
+                        <button onClick={e => postDelete(storeId, r.id)}>
+                          삭제
+                        </button>
+                      </React.Fragment>
+                    );
+                  }
+                }}
+              </UserConsumer>
               <div className="UserReview__content__ratings">
                 {/* 소수점 이하는 버리면 된다. */}
                 <div>
