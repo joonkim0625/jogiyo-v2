@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './UserReviewView.scss';
 import withLoading from '../hoc/WithLoading';
 import { UserConsumer } from '../contexts/UserContext';
@@ -42,8 +43,9 @@ class UserReviewView extends Component {
       deliveryAvg,
       quantityAvg,
       user,
+      handleUserReviewPage,
     } = this.props;
-    console.log(review);
+    console.log(handleUserReviewPage);
 
     return (
       <div className="UserReview">
@@ -78,7 +80,25 @@ class UserReviewView extends Component {
         {/* 어떻게 구해야 할까 */}
         <div className="UserReview__count">
           리뷰 <strong>{review.length}</strong>개, 사장님 댓글{' '}
-          <strong>{ownerReplyCount}</strong>개<button>새 리뷰 작성</button>
+          <strong>{ownerReplyCount}</strong>개
+          <UserConsumer>
+            {({ id }) => {
+              if (id) {
+                return (
+                  <Link
+                    to={{
+                      pathname: '/edit',
+                      state: {
+                        storeId,
+                      },
+                    }}
+                  >
+                    <button>새 리뷰 작성</button>
+                  </Link>
+                );
+              }
+            }}
+          </UserConsumer>
         </div>
 
         <div>

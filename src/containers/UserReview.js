@@ -87,6 +87,7 @@ export default class UserReview extends Component {
     return (
       <div>
         <UserReviewView
+          handleUserReviewPage={this.props.handleUserReviewPage}
           key={review.length}
           updateReviewLength={this.props.updateReviewLength}
           storeId={storeId}

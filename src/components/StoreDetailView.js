@@ -45,9 +45,10 @@ class StoreDetailView extends Component {
     // page === 'menu' -> 메뉴 정보 페이지
     // page === 'user-review' -> 사용자 리뷰 페이지
     // page === 'store-info' -> 음식점 정보 페이지
-    this.state = { selected: 'menu', infoShow: false, review: [] };
+    this.state = { selected: 'menu', infoShow: false };
     this.handleInfoClick = this.handleInfoClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.handleUserReviewPage = this.handleUserReviewPage.bind(this);
   }
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -219,6 +220,7 @@ class StoreDetailView extends Component {
                 <Menu storeId={id} pullCartItem={pullCartItem} />
               ) : this.state.selected === 'user-review' ? (
                 <UserReview
+                  handleUserReviewPage={this.handleUserReviewPage.bind(this)}
                   updateReviewLength={this.props.updateReviewLength}
                   storeId={id}
                   ownerReplyCount={ownerReplyCount}
