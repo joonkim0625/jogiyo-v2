@@ -35,6 +35,7 @@ class StoreDetailView extends Component {
     ratingTasteAvg: 0,
     cart: [],
     cartLength: 0,
+    reviewLength: 0,
   };
 
   constructor(props) {
@@ -47,6 +48,7 @@ class StoreDetailView extends Component {
     this.state = { selected: 'menu', infoShow: false };
     this.handleInfoClick = this.handleInfoClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
+    this.handleUserReviewPage = this.handleUserReviewPage.bind(this);
   }
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -120,6 +122,8 @@ class StoreDetailView extends Component {
       ratingDeliveryAvg,
       ratingQuantityAvg,
       ratingTasteAvg,
+
+      reviewLength,
     } = this.props;
 
     return (
@@ -200,7 +204,7 @@ class StoreDetailView extends Component {
                 this.state.selected === 'user-review' ? 'active' : null
               }
             >
-              클린리뷰 {reviewCount}
+              클린리뷰 {reviewLength}
             </button>
             <button
               onClick={() => this.handleStoreInfoPage()}
@@ -216,6 +220,8 @@ class StoreDetailView extends Component {
                 <Menu storeId={id} pullCartItem={pullCartItem} />
               ) : this.state.selected === 'user-review' ? (
                 <UserReview
+                  handleUserReviewPage={this.handleUserReviewPage.bind(this)}
+                  updateReviewLength={this.props.updateReviewLength}
                   storeId={id}
                   ownerReplyCount={ownerReplyCount}
                   reviewStar={reviewStar}

@@ -36,7 +36,9 @@ export default class StoreDetail extends Component {
         (acc, item) => acc + item.quantity,
         0
       ),
-    }; // sessionStorage에서 가져오는 정보들
+      reviewLength: 0,
+    };
+    this.updateReviewLength = this.updateReviewLength.bind(this);
   }
   reviewStar(count) {
     const num = Math.floor(count);
@@ -51,8 +53,25 @@ export default class StoreDetail extends Component {
     const { data: storeInfo } = await api.get(
       `/restaurants/api/${storeId}/info/`
     );
+
+    const { data: review } = await api.get(
+      `/restaurants/api/${storeId}/review/`
+    );
+
     this.setState({
       ...storeInfo,
+
+      reviewLength: review.length,
+    });
+  }
+
+  async updateReviewLength() {
+    const { storeId } = this.props;
+    const { data: review } = await api.get(
+      `/restaurants/api/${storeId}/review/`
+    );
+    this.setState({
+      reviewLength: review.length,
     });
   }
 
@@ -67,13 +86,6 @@ export default class StoreDetail extends Component {
   };
 
   render() {
-    console.log(
-      JSON.parse(sessionStorage.cart).reduce(
-        (acc, item) => acc + item.quantity,
-        0
-      )
-    );
-
     const { storeId } = this.props;
     return (
       <div>
@@ -82,6 +94,7 @@ export default class StoreDetail extends Component {
           id={storeId}
           pullCartItem={this.pullCartItem}
           reviewStar={this.reviewStar.bind(this)}
+          updateReviewLength={this.updateReviewLength}
         />
       </div>
     );
