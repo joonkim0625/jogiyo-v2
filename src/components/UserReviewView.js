@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './UserReviewView.scss';
 import withLoading from '../hoc/WithLoading';
+import { UserConsumer } from '../contexts/UserContext';
 
 class UserReviewView extends Component {
   static defaultProps = {
@@ -30,6 +32,8 @@ class UserReviewView extends Component {
 
   render() {
     const {
+      storeId,
+      postDelete,
       review,
       ownerReplyCount,
       reviewStar,
@@ -39,9 +43,9 @@ class UserReviewView extends Component {
       deliveryAvg,
       quantityAvg,
       user,
+      handleUserReviewPage,
     } = this.props;
-    console.log(review);
-    console.log(review.menuSummary);
+    console.log(handleUserReviewPage);
 
     return (
       <div className="UserReview">
@@ -77,7 +81,26 @@ class UserReviewView extends Component {
         <div className="UserReview__count">
           리뷰 <strong>{review.length}</strong>개, 사장님 댓글{' '}
           <strong>{ownerReplyCount}</strong>개
+          <UserConsumer>
+            {({ id }) => {
+              if (id) {
+                return (
+                  <Link
+                    to={{
+                      pathname: '/edit',
+                      state: {
+                        storeId,
+                      },
+                    }}
+                  >
+                    <button>새 리뷰 작성</button>
+                  </Link>
+                );
+              }
+            }}
+          </UserConsumer>
         </div>
+
         <div>
           {review.map(r => (
             <div className="UserReview__content" key={r.id}>
@@ -88,6 +111,26 @@ class UserReviewView extends Component {
               <span className="UserReview__content__time">
                 {timeDiff(r.time)}
               </span>
+              <UserConsumer>
+                {/* 유저컨수머에서 아이디 값을 사용해 표현한 버튼 표시 */}
+                {({ id }) => {
+                  if (r.user.id === id) {
+                    return (
+                      <React.Fragment>
+                        <button>수정</button>{' '}
+                        <button
+                          onClick={() => {
+                            postDelete(storeId, r.id);
+                            this.props.updateReviewLength();
+                          }}
+                        >
+                          삭제
+                        </button>
+                      </React.Fragment>
+                    );
+                  }
+                }}
+              </UserConsumer>
               <div className="UserReview__content__ratings">
                 {/* 소수점 이하는 버리면 된다. */}
                 <div>
