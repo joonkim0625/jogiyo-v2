@@ -6,9 +6,42 @@ class Hero extends Component {
   static defaultProps = {
     addrString: {},
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      addrInput: '',
+      addrShow: '',
+    };
+  }
+
+  componentDidMount() {
+    // const { handleSetGps } = this.props;
+
+    // handleSetGps();
+
+    let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+
+    let addrShow =
+      addrInput &&
+      addrInput.firstRegion +
+        ' ' +
+        addrInput.secondRegion +
+        ' ' +
+        addrInput.thirdRegion;
+    sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
+
+    this.setState({
+      addrInput,
+      addrShow,
+    });
+  }
+
   render() {
+    console.log(this.state);
     const { handleGpsClick } = this.props;
-    return <HeroView findMyAddress={handleGpsClick} />;
+    return <HeroView findMyAddress={handleGpsClick} {...this.state} />;
   }
 }
 
