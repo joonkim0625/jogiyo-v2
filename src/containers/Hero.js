@@ -7,35 +7,32 @@ class Hero extends Component {
     addrString: {},
   };
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      addrInput: '',
-      addrShow: '',
-    };
-  }
+  //   this.state = {
+  //     addrInput: '',
+  //     addrShow: '',
+  //   };
+  // }
 
   componentDidMount() {
     // const { handleSetGps } = this.props;
-
     // handleSetGps();
-
-    let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
-
-    let addrShow =
-      addrInput &&
-      addrInput.firstRegion +
-        ' ' +
-        addrInput.secondRegion +
-        ' ' +
-        addrInput.thirdRegion;
-    sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
-
-    this.setState({
-      addrInput,
-      addrShow,
-    });
+    // let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+    // let addrShow =
+    //   addrInput &&
+    //   addrInput.firstRegion +
+    //     ' ' +
+    //     addrInput.secondRegion +
+    //     ' ' +
+    //     addrInput.thirdRegion;
+    // sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
+    // this.setState({
+    //   addrInput,
+    //   addrShow,
+    // });
+    console.log('히어로');
   }
 
   render() {

@@ -12,37 +12,38 @@ const api = axios.create({
 
 const { Provider, Consumer } = React.createContext();
 
-function getGps() {
-  function handleToSession(longitude, latitude) {
-    const location = {
-      x: longitude,
-      y: latitude,
-    };
+// function getGps() {
+//   function handleToSession(longitude, latitude) {
+//     const location = {
+//       x: longitude,
+//       y: latitude,
+//     };
 
-    sessionStorage.setItem('location', JSON.stringify(location));
-  }
+//     sessionStorage.setItem('location', JSON.stringify(location));
+//   }
 
-  if (navigator.geolocation) {
-    // GPS를 지원하면
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        handleToSession(position.coords.longitude, position.coords.latitude);
-      },
-      function(error) {
-        console.error(error);
-      },
-      {
-        enableHighAccuracy: false,
-        maximumAge: 0,
-        timeout: Infinity,
-      }
-    );
-  } else {
-    alert('GPS를 지원하지 않습니다');
-  }
-}
+//   if (navigator.geolocation) {
+//     // GPS를 지원하면
+//     navigator.geolocation.getCurrentPosition(
+//       function(position) {
+//         handleToSession(position.coords.longitude, position.coords.latitude);
+//       },
+//       function(error) {
+//         console.error(error);
+//       },
+//       {
+//         enableHighAccuracy: false,
+//         maximumAge: 0,
+//         timeout: Infinity,
+//       }
+//     );
+//   } else {
+//     alert('GPS를 지원하지 않습니다');
+//   }
+// }
 
-getGps();
+// getGps();
+console.log(JSON.parse(sessionStorage.getItem('location')));
 
 export default class KakaoApiProvider extends Component {
   constructor(props) {
@@ -54,13 +55,16 @@ export default class KakaoApiProvider extends Component {
       locationY: JSON.parse(sessionStorage.location).y,
       handleGpsClick: this.handleGpsClick,
       addrString: {},
+      addrShow: '',
       click: false,
       handleClick: this.handleClick.bind(this),
     };
     this.handleGpsClick = this.handleGpsClick.bind(this);
     // this.handleSetGps = this.handleSetGps.bind(this);
+
     this.handleToSession = this.handleToSession.bind(this);
   }
+
   handleClick() {
     this.setState({
       click: true,
@@ -72,57 +76,84 @@ export default class KakaoApiProvider extends Component {
   };
 
   handleToSession(longitude, latitude) {
+    this.setState({
+      locationX: longitude,
+      locationY: latitude,
+    });
     const location = {
       x: longitude,
       y: latitude,
     };
-
+    console.log(JSON.parse(sessionStorage.getItem('location')));
     sessionStorage.setItem('location', JSON.stringify(location));
   }
 
   async componentDidMount() {
-    // const handleSetState = this.handleSetState;
-    // if (navigator.geolocation) {
-    //   // GPS를 지원하면
-    //   navigator.geolocation.getCurrentPosition(
-    //     function(position) {
-    //       handleSetState(position.coords.longitude, position.coords.latitude);
-    //     },
-    //     function(error) {
-    //       console.error(error);
-    //     },
-    //     {
-    //       enableHighAccuracy: false,
-    //       maximumAge: 0,
-    //       timeout: Infinity,
-    //     }
-    //   );
-    // } else {
-    //   alert('GPS를 지원하지 않습니다');
-    // }
     console.log(this.state);
+    console.log('카카오');
 
-    // const res = await api.get(
-    //   'https://dapi.kakao.com//v2/local/geo/coord2address.json',
-    //   {
-    //     params: {
-    //       x: this.state.locationX,
-    //       y: this.state.locationY,
-    //     },
-    //   }
-    // );
-    // const location = { x: this.state.locationX, y: this.state.locationY };
-    // const addr = res.data.documents[0].address;
-    // const addrString = {
-    //   firstRegion: addr.region_1depth_name,
-    //   secondRegion: addr.region_2depth_name,
-    //   thirdRegion: addr.region_3depth_name,
-    // };
+    console.log(JSON.parse(sessionStorage.getItem('location')));
+    const handleToSession = this.handleToSession;
 
-    // sessionStorage.setItem('location', JSON.stringify(location));
-    // sessionStorage.setItem('addrString', JSON.stringify(addrString));
-    // this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
+    if (navigator.geolocation) {
+      // GPS를 지원하면
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          handleToSession(position.coords.longitude, position.coords.latitude);
+        },
+        function(error) {
+          console.error(error);
+        },
+        {
+          enableHighAccuracy: false,
+          maximumAge: 0,
+          timeout: Infinity,
+        }
+      );
+    } else {
+      alert('GPS를 지원하지 않습니다');
+    }
   }
+
+  // getXY() {
+  //   if (JSON.parse(sessionStorage.getItem('location'))) {
+  //     const res = api.get(
+  //       'https://dapi.kakao.com//v2/local/geo/coord2address.json',
+  //       {
+  //         params: {
+  //           x: this.state.locationX,
+  //           y: this.state.locationY,
+  //         },
+  //       }
+  //     );
+  //     const location = { x: this.state.locationX, y: this.state.locationY };
+  //     const addr = res.data.documents[0].address;
+  //     const addrString = {
+  //       firstRegion: addr.region_1depth_name,
+  //       secondRegion: addr.region_2depth_name,
+  //       thirdRegion: addr.region_3depth_name,
+  //     };
+
+  //     sessionStorage.setItem('location', JSON.stringify(location));
+  //     sessionStorage.setItem('addrString', JSON.stringify(addrString));
+  //     this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
+
+  //     let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+
+  //     let addrShow =
+  //       addrInput &&
+  //       addrInput.firstRegion +
+  //         ' ' +
+  //         addrInput.secondRegion +
+  //         ' ' +
+  //         addrInput.thirdRegion;
+  //     sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
+  //   }
+  //   // this.setState({
+  //   //   addrInput,
+  //   //   addrShow,
+  //   // });
+  // }
 
   handleGpsClick = async e => {
     e.preventDefault();
@@ -141,10 +172,7 @@ export default class KakaoApiProvider extends Component {
     // console.log(res.data.documents[0].address.region_1depth_name);
     // console.log(res.data.documents[0].address.region_2depth_name);
     // console.log(res.data.documents[0].address.region_3depth_name);
-    const location = {
-      x: this.state.locationX,
-      y: this.state.locationY,
-    };
+    const location = { x: this.state.locationX, y: this.state.locationY };
     const addr = res2.data.documents[0].address;
     const addrString = {
       firstRegion: addr.region_1depth_name,
@@ -154,7 +182,21 @@ export default class KakaoApiProvider extends Component {
 
     sessionStorage.setItem('location', JSON.stringify(location));
     sessionStorage.setItem('addrString', JSON.stringify(addrString));
-    this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
+
+    let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+
+    let addrShow =
+      addrInput &&
+      addrInput.firstRegion +
+        ' ' +
+        addrInput.secondRegion +
+        ' ' +
+        addrInput.thirdRegion;
+    sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
+    this.setState({
+      addrString: JSON.parse(sessionStorage.addrString),
+      addrShow: JSON.parse(sessionStorage.addrShow),
+    });
   };
 
   // *----------------------------------*
@@ -185,26 +227,8 @@ export default class KakaoApiProvider extends Component {
   //   this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
   // };
   render() {
-    // const handleToSession = this.handleToSession;
-    // if (navigator.geolocation) {
-    //   // GPS를 지원하면
-    //   navigator.geolocation.getCurrentPosition(
-    //     function(position) {
-    //       handleToSession(position.coords.longitude, position.coords.latitude);
-    //     },
-    //     function(error) {
-    //       console.error(error);
-    //     },
-    //     {
-    //       enableHighAccuracy: false,
-    //       maximumAge: 0,
-    //       timeout: Infinity,
-    //     }
-    //   );
-    // } else {
-    //   alert('GPS를 지원하지 않습니다');
-    // }
     console.log(this.state);
+    console.log(JSON.parse(sessionStorage.getItem('location')));
 
     return <Provider value={this.state}>{this.props.children}</Provider>;
   }
