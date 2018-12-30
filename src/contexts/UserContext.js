@@ -95,6 +95,7 @@ export default class UserProvider extends Component {
   }
 
   render() {
+    // const value = { username: this.state.username, id: this.state.id };
     return <Provider value={this.state}>{this.props.children}</Provider>;
   }
 }

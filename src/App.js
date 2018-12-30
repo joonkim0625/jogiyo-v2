@@ -12,6 +12,7 @@ import CartPage from './pages/CartPage';
 import PayPage from './pages/PayPage';
 import { KakaoApiProvider } from './contexts/kakaoApiContext';
 import UserProvider from './contexts/UserContext';
+import NewReviewFormPage from './pages/NewReviewFormPage';
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path="/register" component={RegisterPage} />
               <Route path="/pay" component={PayPage} />
               <Route path="/cart" component={CartPage} />
+              <Route path="/edit" component={NewReviewFormPage} />
             </React.Fragment>
           </BrowserRouter>
         </UserProvider>
