@@ -8,24 +8,25 @@ class HeroView extends Component {
 
     this.state = {
       defaultValue: '',
+      addrInput: '',
+      addrShow: '',
     };
   }
 
-  async componentDidMount() {}
-
   render() {
-    const { findMyAddress, handleClick } = this.props;
-    let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+    console.log(this.state);
+    const { findMyAddress, handleClick, addrInput, addrShow } = this.props;
+    // let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
 
-    let addrShow =
-      addrInput &&
-      addrInput.firstRegion +
-        ' ' +
-        addrInput.secondRegion +
-        ' ' +
-        addrInput.thirdRegion;
-    sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
-    const isLocationEmpty = JSON.parse(sessionStorage.getItem('location'));
+    // let addrShow =
+    //   addrInput &&
+    //   addrInput.firstRegion +
+    //     ' ' +
+    //     addrInput.secondRegion +
+    //     ' ' +
+    //     addrInput.thirdRegion;
+    // sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
+    // const isLocationEmpty = JSON.parse(sessionStorage.getItem('location'));
     return (
       <form className="Hero">
         <fieldset>
