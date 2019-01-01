@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-let location = JSON.parse(sessionStorage.getItem('location')) || {};
+// let location = JSON.parse(sessionStorage.getItem('location')) || {};
 
-sessionStorage.setItem('location', JSON.stringify(location));
+// sessionStorage.setItem('location', JSON.stringify(location));
 
 const api = axios.create({
   headers: { Authorization: 'KakaoAK 1a72ca0688a79816a4a07debdf9bc661' },
@@ -53,6 +53,7 @@ export default class KakaoApiProvider extends Component {
       show: true,
       locationX: 0,
       locationY: 0,
+
       handleGpsClick: this.handleGpsClick,
       addrString: {},
       addrShow: '',
@@ -88,7 +89,7 @@ export default class KakaoApiProvider extends Component {
     sessionStorage.setItem('location', JSON.stringify(location));
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     console.log(this.state);
     console.log('카카오');
 
@@ -113,7 +114,8 @@ export default class KakaoApiProvider extends Component {
     } else {
       alert('GPS를 지원하지 않습니다');
     }
-    // const res = api.get(
+
+    // const res = await api.get(
     //   'https://dapi.kakao.com//v2/local/geo/coord2address.json',
     //   {
     //     params: {
@@ -185,6 +187,45 @@ export default class KakaoApiProvider extends Component {
   //   //   addrShow,
   //   // });
   // }
+  async componentDidUpdate(prevState) {
+    console.log(this.state.locationX, this.state.locationY);
+    if (this.state.locationIn === 0) {
+      console.log(prevState.locationX);
+      console.log(this.state.locationX, this.state.locationY);
+      const res = await api.get(
+        'https://dapi.kakao.com//v2/local/geo/coord2address.json',
+        {
+          params: {
+            x: this.state.locationX,
+            y: this.state.locationY,
+          },
+        }
+      );
+      console.log(res);
+      console.log(res.data);
+      const location = { x: this.state.locationX, y: this.state.locationY };
+      const addr = res.data.documents[0].address;
+      const addrString = {
+        firstRegion: addr.region_1depth_name,
+        secondRegion: addr.region_2depth_name,
+        thirdRegion: addr.region_3depth_name,
+      };
+      sessionStorage.setItem('location', JSON.stringify(location));
+      sessionStorage.setItem('addrString', JSON.stringify(addrString));
+      this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
+      let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+      let addrShow =
+        addrInput &&
+        addrInput.firstRegion +
+          ' ' +
+          addrInput.secondRegion +
+          ' ' +
+          addrInput.thirdRegion;
+      sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
+    }
+    console.log(this.state.locationX, prevState.locationX);
+    console.log('업데이트 됨!');
+  }
 
   handleGpsClick = async e => {
     e.preventDefault();
