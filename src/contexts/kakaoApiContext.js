@@ -51,8 +51,8 @@ export default class KakaoApiProvider extends Component {
 
     this.state = {
       show: true,
-      locationX: JSON.parse(sessionStorage.location).x,
-      locationY: JSON.parse(sessionStorage.location).y,
+      locationX: 0,
+      locationY: 0,
       handleGpsClick: this.handleGpsClick,
       addrString: {},
       addrShow: '',
@@ -113,6 +113,37 @@ export default class KakaoApiProvider extends Component {
     } else {
       alert('GPS를 지원하지 않습니다');
     }
+    // const res = api.get(
+    //   'https://dapi.kakao.com//v2/local/geo/coord2address.json',
+    //   {
+    //     params: {
+    //       x: this.state.locationX,
+    //       y: this.state.locationY,
+    //     },
+    //   }
+    // );
+    // const location = { x: this.state.locationX, y: this.state.locationY };
+    // const addr = res.data.documents[0].address;
+    // const addrString = {
+    //   firstRegion: addr.region_1depth_name,
+    //   secondRegion: addr.region_2depth_name,
+    //   thirdRegion: addr.region_3depth_name,
+    // };
+
+    // sessionStorage.setItem('location', JSON.stringify(location));
+    // sessionStorage.setItem('addrString', JSON.stringify(addrString));
+    // this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
+
+    // let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
+
+    // let addrShow =
+    //   addrInput &&
+    //   addrInput.firstRegion +
+    //     ' ' +
+    //     addrInput.secondRegion +
+    //     ' ' +
+    //     addrInput.thirdRegion;
+    // sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
   }
 
   // getXY() {
