@@ -9,7 +9,6 @@ export default class NewReviewForm extends Component {
 
     await api.post(`/restaurants/api/${storeId}/review/`, {
       comment: body,
-      // TODO: 어떻게 입력받을 지 고민
       rating_delivery: tasteRate,
       rating_quantity: foodAmountRate,
       rating_taste: deliveryRate,

@@ -98,7 +98,7 @@ class UserReviewView extends Component {
                 return (
                   <Link
                     to={{
-                      pathname: '/edit',
+                      pathname: '/new',
                       state: {
                         storeId,
                       },
@@ -128,7 +128,17 @@ class UserReviewView extends Component {
                   if (r.user.id === id) {
                     return (
                       <React.Fragment>
-                        <button>수정</button>{' '}
+                        <Link
+                          to={{
+                            pathname: '/edit',
+                            state: {
+                              storeId,
+                              postId: r.id,
+                            },
+                          }}
+                        >
+                          <button>수정</button>
+                        </Link>{' '}
                         <button
                           onClick={() => {
                             postDelete(storeId, r.id);
