@@ -8,12 +8,13 @@ import { withKakao } from '../contexts/kakaoApiContext';
 class FoodCategoryPage extends Component {
   render() {
     console.log(this.props);
-    const { click } = this.props;
+    const { click, addrString } = this.props;
+
     return (
       <Layout>
         <div className="FoodCategory">
           <div className="FoodCategory__link-wrap">
-            {click ? (
+            {addrString ? (
               <>
                 <Link className="FoodCategory__link--all" to="/category">
                   전체 보기
