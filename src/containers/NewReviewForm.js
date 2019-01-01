@@ -16,8 +16,10 @@ export default class NewReviewForm extends Component {
     history.push(`/store/${storeId}`);
   }
   render() {
+    const { storeId } = this.props;
     return (
       <ReviewForm
+        storeId={storeId}
         onSubmit={(body, tasteRate, foodAmountRate, deliveryRate) =>
           this.handleSubmit(body, tasteRate, foodAmountRate, deliveryRate)
         }
