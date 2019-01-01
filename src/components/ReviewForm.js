@@ -13,13 +13,22 @@ class ReviewForm extends Component {
     };
   }
 
-  // componentDidMount() {
+  componentDidMount() {
+    const { tasteRate, foodAmountRate, deliveryRate } = this.props;
+    if (tasteRate && foodAmountRate && deliveryRate) {
+      this.setState({
+        tasteRate,
+        foodAmountRate,
+        deliveryRate,
+      });
+    }
+  }
+
+  // componentDidUpdate(prevState) {
   //   const { tasteRate, foodAmountRate, deliveryRate } = this.props;
-  //   this.setState({
-  //     tasteRate,
-  //     foodAmountRate,
-  //     deliveryRate,
-  //   });
+  //   if (this.state.tasteRate !== prevState.tasteRate) {
+  //     this.setState({ tasteRate, foodAmountRate, deliveryRate });
+  //   }
   // }
   handleTasteRateChange(e) {
     this.setState({

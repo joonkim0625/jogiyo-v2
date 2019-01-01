@@ -59,9 +59,9 @@ export default class EditReviewForm extends Component {
           this.handleSubmit(body, tasteRate, foodAmountRate, deliveryRate)
         }
         body={body}
-        tasteRate={tasteRate}
-        foodAmountRate={foodAmountRate}
-        deliveryRate={deliveryRate}
+        tasteRate={parseInt(tasteRate)}
+        foodAmountRate={parseInt(foodAmountRate)}
+        deliveryRate={parseInt(deliveryRate)}
       />
     );
   }
