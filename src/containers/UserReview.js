@@ -58,7 +58,7 @@ export default class UserReview extends Component {
   async refreshReview() {
     const { storeId } = this.props;
     const res = await api.get(`/restaurants/api/${storeId}/review/`);
-    console.log(res.data);
+
     this.setState({
       review: res.data,
       loading: false,
@@ -66,8 +66,6 @@ export default class UserReview extends Component {
   }
 
   async handlePostDelete(storeId, postId) {
-    console.log(typeof storeId);
-    console.log(storeId, postId);
     await api.delete(`/restaurants/api/${storeId}/review/${postId}/`);
     await this.refreshReview();
   }

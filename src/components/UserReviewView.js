@@ -30,6 +30,17 @@ class UserReviewView extends Component {
     ],
   };
 
+  // handleToEditPage() {
+  //   const { storeId, handleUserReviewPage, history } = this.props;
+  //   history.push({
+  //     pathname: '/edit',
+  //     state: {
+  //       storeId,
+  //       handleUserReviewPage,
+  //     },
+  //   });
+  // }
+
   render() {
     const {
       storeId,
