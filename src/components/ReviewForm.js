@@ -23,9 +23,11 @@ class ReviewForm extends Component {
   }
 
   componentDidMount() {
-    const { tasteRate, foodAmountRate, deliveryRate } = this.props;
-    if (tasteRate && foodAmountRate && deliveryRate) {
+    const { body, tasteRate, foodAmountRate, deliveryRate } = this.props;
+
+    if (body) {
       this.setState({
+        textCount: body.length,
         tasteRate,
         foodAmountRate,
         deliveryRate,
@@ -34,7 +36,10 @@ class ReviewForm extends Component {
   }
 
   handleTextCount(e) {
-    const body = e.target.
+    const body = e.target.value;
+    this.setState({
+      textCount: body.length,
+    });
   }
 
   handleFileChange(e) {
@@ -83,7 +88,7 @@ class ReviewForm extends Component {
 
       files,
     } = this.state;
-    console.log(files);
+
     return (
       <div className="ReviewForm">
         <form
@@ -110,9 +115,11 @@ class ReviewForm extends Component {
             console.log(files);
           }}
         >
-          <div className="ReviewForm__body">
-            <div>이 음식점에 대한 상세한 평가를 해주세요.</div>
-            <div class="options">
+          <div className="ReviewForm__form__rates">
+            <div className="ReviewForm__form__rates__text">
+              이 음식점에 대한 상세한 평가를 해주세요.
+            </div>
+            <div className="ReviewForm__form__rates__options">
               <span>맛</span>
               <select
                 value={tasteRate}
@@ -148,10 +155,12 @@ class ReviewForm extends Component {
               </select>
             </div>
           </div>
-          <label for="reviewText" hidden>
+          <label htmlFor="reviewText" hidden>
             10자 이상의 리뷰를 남겨주세요.
           </label>
           <textarea
+            className="ReviewForm__form__comments"
+            onChange={e => this.handleTextCount(e)}
             id="reviewText"
             name="body"
             cols="30"
@@ -160,13 +169,16 @@ class ReviewForm extends Component {
               this.props.body // 수정 버튼이 눌렸을 때 받는 body 값. edit할 때 넘어와야 한다
             }
             placeholder="사진과 함께 리뷰 작성 시 최대 100포인트 적립 가능! 음식에 대한 솔직한 리뷰를 남겨주세요.(10자이상)"
-            minlength="10"
-            maxlength="300"
+            minLength="10"
+            maxLength="300"
             required
           />
-
+          <span className="ReviewForm__form__commentsCount">
+            {this.state.textCount} / 300
+          </span>
           <button>작성</button>
         </form>
+        {/* 첨부할 이미지를 보여주는 섹션 */}
         <input
           hidden
           ref={this.inputRef}
@@ -178,7 +190,7 @@ class ReviewForm extends Component {
         <button onClick={() => this.inputRef.current.click()}>
           이미지 선택
         </button>
-        <div>
+        <div className="ReviewForm__imagePreview">
           {files.map((f, index) => (
             <ImagePreview file={f} key={index} />
           ))}
