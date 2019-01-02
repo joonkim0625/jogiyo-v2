@@ -11,12 +11,13 @@ class ReviewForm extends Component {
     this.inputRef = React.createRef();
 
     this.state = {
+      textCount: 0,
       tasteRate: 1,
       foodAmountRate: 1,
       deliveryRate: 1,
-      images: [],
+
       // 이미지 업로드 관련
-      content: '',
+
       files: [],
     };
   }
@@ -32,25 +33,30 @@ class ReviewForm extends Component {
     }
   }
 
+  handleTextCount(e) {
+    const body = e.target.
+  }
+
   handleFileChange(e) {
     e.persist();
     this.setState(prevState => ({
       files: [...prevState.files, ...e.target.files],
     }));
+    console.log(this.state.files);
   }
-  async handleImgSubmit() {
-    const { storeId } = this.props;
-    const { content, files } = this.state;
-    const formData = new FormData();
-    formData.append('content', content);
-    files.forEach((f, index) => {
-      formData.append(`file${index}`, f);
-    });
+  // async handleImgSubmit() {
+  //   const { storeId } = this.props;
+  //   const { files } = this.state;
+  //   const formData = new FormData();
 
-    await api.post(`/restaurants/api/${storeId}/review/`, {
-      reviewImages: formData,
-    });
-  }
+  //   files.forEach((f, index) => {
+  //     formData.append(`file${index}`, f);
+  //   });
+
+  //   await api.post(`/restaurants/api/${storeId}/review/`, {
+  //     review_images: formData,
+  //   });
+  // }
 
   handleTasteRateChange(e) {
     this.setState({
@@ -74,83 +80,109 @@ class ReviewForm extends Component {
       tasteRate,
       foodAmountRate,
       deliveryRate,
-      content,
+
       files,
     } = this.state;
+    console.log(files);
     return (
-      <div>
+      <div className="ReviewForm">
         <form
+          className="ReviewForm__form"
           onSubmit={e => {
             e.preventDefault();
 
             const body = e.target.elements.body.value;
-            this.handleImgSubmit();
-            this.props.onSubmit(body, tasteRate, foodAmountRate, deliveryRate);
+            const { files } = this.state;
+            const formData = new FormData();
+
+            files.forEach((f, index) => {
+              formData.append(`file${index}`, f);
+            });
+
+            this.props.onSubmit(
+              body,
+              tasteRate,
+              foodAmountRate,
+              deliveryRate,
+              formData
+            );
+
+            console.log(files);
           }}
         >
-          <div>
-            <span>맛</span>
-            <select
-              value={tasteRate}
-              onChange={e => this.handleTasteRateChange(e)}
-            >
-              {rating.map((r, index) => (
-                <option value={r} key={index}>
-                  {r}
-                </option>
-              ))}
-            </select>
-            <span>양</span>
-            <select
-              value={foodAmountRate}
-              onChange={e => this.handleFoodAmountRateChange(e)}
-            >
-              {rating.map((r, index) => (
-                <option value={r} key={index}>
-                  {r}
-                </option>
-              ))}
-            </select>
-            <span>배달</span>
-            <select
-              value={deliveryRate}
-              onChange={e => this.handleDeliveryRateChange(e)}
-            >
-              {rating.map((r, index) => (
-                <option value={r} key={index}>
-                  {r}
-                </option>
-              ))}
-            </select>
+          <div className="ReviewForm__body">
+            <div>이 음식점에 대한 상세한 평가를 해주세요.</div>
+            <div class="options">
+              <span>맛</span>
+              <select
+                value={tasteRate}
+                onChange={e => this.handleTasteRateChange(e)}
+              >
+                {rating.map((r, index) => (
+                  <option value={r} key={index}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+              <span>양</span>
+              <select
+                value={foodAmountRate}
+                onChange={e => this.handleFoodAmountRateChange(e)}
+              >
+                {rating.map((r, index) => (
+                  <option value={r} key={index}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+              <span>배달</span>
+              <select
+                value={deliveryRate}
+                onChange={e => this.handleDeliveryRateChange(e)}
+              >
+                {rating.map((r, index) => (
+                  <option value={r} key={index}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
+          <label for="reviewText" hidden>
+            10자 이상의 리뷰를 남겨주세요.
+          </label>
           <textarea
+            id="reviewText"
             name="body"
             cols="30"
             rows="10"
             defaultValue={
               this.props.body // 수정 버튼이 눌렸을 때 받는 body 값. edit할 때 넘어와야 한다
             }
+            placeholder="사진과 함께 리뷰 작성 시 최대 100포인트 적립 가능! 음식에 대한 솔직한 리뷰를 남겨주세요.(10자이상)"
+            minlength="10"
+            maxlength="300"
             required
           />
-          <input
-            hidden
-            ref={this.inputRef}
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={e => this.handleFileChange(e)}
-          />
-          <button onClick={() => this.inputRef.current.click()}>
-            이미지 선택
-          </button>
-          <div>
-            {files.map((f, index) => (
-              <ImagePreview file={f} key={index} />
-            ))}
-          </div>
 
           <button>작성</button>
         </form>
+        <input
+          hidden
+          ref={this.inputRef}
+          type="file"
+          accept="image/*"
+          multiple
+          onChange={e => this.handleFileChange(e)}
+        />
+        <button onClick={() => this.inputRef.current.click()}>
+          이미지 선택
+        </button>
+        <div>
+          {files.map((f, index) => (
+            <ImagePreview file={f} key={index} />
+          ))}
+        </div>
       </div>
     );
   }
