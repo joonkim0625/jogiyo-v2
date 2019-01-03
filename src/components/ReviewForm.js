@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import api from '../api';
 import ImagePreview from './ImagePreview';
 
+import './ReviewForm.scss';
+
 // 아무 상태의 변화가 없으면 함수형 컴포넌트로 생성해보자!
 // 근데 결국 점수의 변화를 담아 놓아야 하기 때문에... 클래스형으로 만들어야 한다.
 class ReviewForm extends Component {
@@ -104,13 +106,9 @@ class ReviewForm extends Component {
               formData.append(`file${index}`, f);
             });
 
-            this.props.onSubmit(
-              body,
-              tasteRate,
-              foodAmountRate,
-              deliveryRate,
-              formData
-            );
+            this.props.onSubmit(body, tasteRate, foodAmountRate, deliveryRate);
+
+            // formData
 
             console.log(files);
           }}
@@ -173,28 +171,34 @@ class ReviewForm extends Component {
             maxLength="300"
             required
           />
-          <span className="ReviewForm__form__commentsCount">
+          <div className="ReviewForm__form__comments-count">
             {this.state.textCount} / 300
-          </span>
-          <button>작성</button>
+          </div>
+          {/* 첨부할 이미지를 보여주는 섹션 */}
+          <input
+            hidden
+            ref={this.inputRef}
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={e => this.handleFileChange(e)}
+          />
+          <button
+            className="ReviewForm__image-preview-btn"
+            onClick={e => {
+              e.preventDefault();
+              this.inputRef.current.click();
+            }}
+          >
+            이미지 선택
+          </button>
+          <div className="ReviewForm__image-preview">
+            {files.map((f, index) => (
+              <ImagePreview file={f} key={index} />
+            ))}
+          </div>
+          <button className="ReviewForm__form__post-btn">등록 완료</button>
         </form>
-        {/* 첨부할 이미지를 보여주는 섹션 */}
-        <input
-          hidden
-          ref={this.inputRef}
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={e => this.handleFileChange(e)}
-        />
-        <button onClick={() => this.inputRef.current.click()}>
-          이미지 선택
-        </button>
-        <div className="ReviewForm__imagePreview">
-          {files.map((f, index) => (
-            <ImagePreview file={f} key={index} />
-          ))}
-        </div>
       </div>
     );
   }

@@ -104,7 +104,9 @@ class UserReviewView extends Component {
                       },
                     }}
                   >
-                    <button>새 리뷰 작성</button>
+                    <button className="UserReview__count__new-review">
+                      새 리뷰 작성
+                    </button>
                   </Link>
                 );
               }
@@ -159,14 +161,14 @@ class UserReviewView extends Component {
                     {reviewStar(r.rating)}
                   </span>
                   <div className="UserReview__content__star">
-                    맛 <strong>★ {Math.trunc(r.ratingTaste)}</strong>양{' '}
-                    <strong>★ {Math.trunc(r.ratingQuantity)}</strong>
-                    배달 <strong>★ {Math.trunc(r.ratingDelivery)}</strong>
+                    맛 <strong>★ {Math.trunc(r.rating_taste)}</strong>양{' '}
+                    <strong>★ {Math.trunc(r.rating_quantity)}</strong>
+                    배달 <strong>★ {Math.trunc(r.rating_delivery)}</strong>
                   </div>
                 </div>
               </div>
               <div className="UserReview__content__order">
-                {r.menuSummary.map(item => (
+                {r.menu_summary.map(item => (
                   <span key={item.id}>{item.name + ' '} </span>
                 ))}
               </div>
