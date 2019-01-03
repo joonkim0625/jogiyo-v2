@@ -43,6 +43,7 @@
 }
 
 .UserReview__count {
+  position: relative;
   height: 56px;
   border-bottom: 1px solid $border-color;
   line-height: 54px;
@@ -53,11 +54,13 @@
   }
 
   button {
+    position: absolute;
     font-size: 1.3rem;
     border: 1px solid $border-color;
     border-radius: 15px;
     padding: 0 6px;
-    margin-left: 205px;
+    top: 15px;
+    right: 18px;
   }
 }
 
