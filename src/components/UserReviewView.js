@@ -6,6 +6,7 @@ import { UserConsumer } from '../contexts/UserContext';
 
 class UserReviewView extends Component {
   static defaultProps = {
+    ownerReplyCount: 0,
     review: [
       // {
       //   "id": 6153,
@@ -29,6 +30,17 @@ class UserReviewView extends Component {
       // },
     ],
   };
+
+  // handleToEditPage() {
+  //   const { storeId, handleUserReviewPage, history } = this.props;
+  //   history.push({
+  //     pathname: '/edit',
+  //     state: {
+  //       storeId,
+  //       handleUserReviewPage,
+  //     },
+  //   });
+  // }
 
   render() {
     const {
@@ -87,13 +99,15 @@ class UserReviewView extends Component {
                 return (
                   <Link
                     to={{
-                      pathname: '/edit',
+                      pathname: '/new',
                       state: {
                         storeId,
                       },
                     }}
                   >
-                    <button>새 리뷰 작성</button>
+                    <button className="UserReview__count__new-review">
+                      새 리뷰 작성
+                    </button>
                   </Link>
                 );
               }
@@ -117,8 +131,8 @@ class UserReviewView extends Component {
                   if (r.user.id === id) {
                     return (
                       <React.Fragment>
-                        <button>수정</button>{' '}
                         <button
+                          className="UserReview__content__delete-btn"
                           onClick={() => {
                             postDelete(storeId, r.id);
                             this.props.updateReviewLength();
@@ -126,6 +140,19 @@ class UserReviewView extends Component {
                         >
                           삭제
                         </button>
+                        <Link
+                          to={{
+                            pathname: '/edit',
+                            state: {
+                              storeId,
+                              postId: r.id,
+                            },
+                          }}
+                        >
+                          <button className="UserReview__content__edit-btn">
+                            수정
+                          </button>
+                        </Link>
                       </React.Fragment>
                     );
                   }
@@ -138,17 +165,18 @@ class UserReviewView extends Component {
                     {reviewStar(r.rating)}
                   </span>
                   <div className="UserReview__content__star">
-                    맛 <strong>★ {Math.trunc(r.ratingTaste)}</strong>양{' '}
-                    <strong>★ {Math.trunc(r.ratingQuantity)}</strong>
-                    배달 <strong>★ {Math.trunc(r.ratingDelivery)}</strong>
+                    맛 <strong>★ {Math.trunc(r.rating_taste)}</strong>양{' '}
+                    <strong>★ {Math.trunc(r.rating_quantity)}</strong>
+                    배달 <strong>★ {Math.trunc(r.rating_delivery)}</strong>
                   </div>
                 </div>
               </div>
               <div className="UserReview__content__order">
-                {r.menuSummary.map(item => (
+                {r.menu_summary.map(item => (
                   <span key={item.id}>{item.name + ' '} </span>
                 ))}
               </div>
+              <img src={r.review_images} alt={r.menu_summary} />
               <p className="UserReview__content__comment">{r.comment}</p>
             </div>
           ))}

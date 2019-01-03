@@ -158,9 +158,9 @@ class StoreDetailView extends Component {
                   ))}
                 </span>
               </p>
-              <p>
+              <div>
                 배달시간 <span>{estimatedDeliveryTime}</span>
-                <p className="StoreDetail__info__text__btn">
+                <div className="StoreDetail__info__text__btn">
                   <button
                     ref={node => {
                       this.node = node;
@@ -175,8 +175,8 @@ class StoreDetailView extends Component {
                       배달시간과는 차이가 있을 수 있습니다.
                     </p>
                   ) : null}
-                </p>
-              </p>
+                </div>
+              </div>
               {additionalDiscountPerMenu ? (
                 <p>
                   <span className="StoreDetail__info__text__delivery_discount">

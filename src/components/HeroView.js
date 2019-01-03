@@ -8,14 +8,15 @@ class HeroView extends Component {
 
     this.state = {
       defaultValue: '',
-      addrInput: '',
-      addrShow: '',
+      addrShowText: '',
     };
   }
 
   render() {
     console.log(this.state);
-    const { findMyAddress, handleClick, addrInput, addrShow } = this.props;
+    const { findMyAddress } = this.props;
+    const { addrShow } = this.props;
+    console.log(this.state.addrShowText);
     // let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
 
     // let addrShow =
@@ -33,7 +34,6 @@ class HeroView extends Component {
           <legend className="readable-hidden">위치 검색</legend>
           <button
             onClick={e => {
-              handleClick();
               findMyAddress(e);
             }}
             className="Hero__gps-icon"
@@ -57,4 +57,4 @@ class HeroView extends Component {
   }
 }
 
-export default withKakao(HeroView);
+export default HeroView;

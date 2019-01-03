@@ -43,7 +43,6 @@ const { Provider, Consumer } = React.createContext();
 // }
 
 // getGps();
-console.log(JSON.parse(sessionStorage.getItem('location')));
 
 export default class KakaoApiProvider extends Component {
   constructor(props) {
@@ -58,7 +57,7 @@ export default class KakaoApiProvider extends Component {
       addrString: {},
       addrShow: '',
       click: false,
-      handleClick: this.handleClick.bind(this),
+      // handleClick: this.handleClick.bind(this),
     };
     this.handleGpsClick = this.handleGpsClick.bind(this);
     // this.handleSetGps = this.handleSetGps.bind(this);
@@ -66,11 +65,11 @@ export default class KakaoApiProvider extends Component {
     this.handleToSession = this.handleToSession.bind(this);
   }
 
-  handleClick() {
-    this.setState({
-      click: true,
-    });
-  }
+  // handleClick() {
+  //   this.setState({
+  //     click: true,
+  //   });
+  // }
 
   handleSetState = (longitude, latitude) => {
     this.setState({ locationX: longitude, locationY: latitude });
@@ -113,6 +112,12 @@ export default class KakaoApiProvider extends Component {
       );
     } else {
       alert('GPS를 지원하지 않습니다');
+    }
+
+    if (JSON.parse(sessionStorage.getItem('addrShow'))) {
+      this.setState({
+        addrShow: JSON.parse(sessionStorage.addrShow),
+      });
     }
 
     // const res = await api.get(
@@ -299,9 +304,6 @@ export default class KakaoApiProvider extends Component {
   //   this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
   // };
   render() {
-    console.log(this.state);
-    console.log(JSON.parse(sessionStorage.getItem('location')));
-
     return <Provider value={this.state}>{this.props.children}</Provider>;
   }
 }
