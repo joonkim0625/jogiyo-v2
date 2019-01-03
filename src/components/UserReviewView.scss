@@ -51,6 +51,14 @@
   strong {
     font-weight: 600;
   }
+
+  button {
+    font-size: 1.3rem;
+    border: 1px solid $border-color;
+    border-radius: 15px;
+    padding: 0 6px;
+    margin-left: 205px;
+  }
 }
 
 .UserReview__content {
@@ -87,6 +95,17 @@
   &__time {
     color: lightgray;
     font-size: 1.2rem;
+    margin-left: 2px;
+  }
+
+  &__delete-btn,
+  &__edit-btn {
+    float: right;
+    border: 1px solid $border-color;
+    border-radius: 15px;
+    margin: 4px;
+    padding: 0 6px;
+    height: 22px;
   }
 
   &__order {

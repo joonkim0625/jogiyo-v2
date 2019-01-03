@@ -6,6 +6,7 @@ import { UserConsumer } from '../contexts/UserContext';
 
 class UserReviewView extends Component {
   static defaultProps = {
+    ownerReplyCount: 0,
     review: [
       // {
       //   "id": 6153,
@@ -130,6 +131,15 @@ class UserReviewView extends Component {
                   if (r.user.id === id) {
                     return (
                       <React.Fragment>
+                        <button
+                          className="UserReview__content__delete-btn"
+                          onClick={() => {
+                            postDelete(storeId, r.id);
+                            this.props.updateReviewLength();
+                          }}
+                        >
+                          삭제
+                        </button>
                         <Link
                           to={{
                             pathname: '/edit',
@@ -139,16 +149,10 @@ class UserReviewView extends Component {
                             },
                           }}
                         >
-                          <button>수정</button>
-                        </Link>{' '}
-                        <button
-                          onClick={() => {
-                            postDelete(storeId, r.id);
-                            this.props.updateReviewLength();
-                          }}
-                        >
-                          삭제
-                        </button>
+                          <button className="UserReview__content__edit-btn">
+                            수정
+                          </button>
+                        </Link>
                       </React.Fragment>
                     );
                   }
@@ -172,6 +176,7 @@ class UserReviewView extends Component {
                   <span key={item.id}>{item.name + ' '} </span>
                 ))}
               </div>
+              <img src={r.review_images} alt={r.menu_summary} />
               <p className="UserReview__content__comment">{r.comment}</p>
             </div>
           ))}

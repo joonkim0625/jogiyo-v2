@@ -14,6 +14,7 @@ class ReviewForm extends Component {
 
     this.state = {
       textCount: 0,
+      body: '',
       tasteRate: 1,
       foodAmountRate: 1,
       deliveryRate: 1,
@@ -46,9 +47,11 @@ class ReviewForm extends Component {
 
   handleFileChange(e) {
     e.persist();
-    this.setState(prevState => ({
-      files: [...prevState.files, ...e.target.files],
-    }));
+    if (e.target.files) {
+      this.setState(prevState => ({
+        files: [...prevState.files, ...e.target.files],
+      }));
+    }
     console.log(this.state.files);
   }
   // async handleImgSubmit() {
@@ -63,6 +66,30 @@ class ReviewForm extends Component {
   //   await api.post(`/restaurants/api/${storeId}/review/`, {
   //     review_images: formData,
   //   });
+  // }
+  // async handleSubmit() {
+  //   // storeId를 프랍으로 받아와야 함
+  //   const { storeId, history } = this.props;
+  //   const { body, tasteRate, foodAmountRate, deliveryRate, files } = this.state;
+
+  //   const formData = new FormData();
+  //   formData.append('comment', body);
+  //   formData.append('rating_taste', tasteRate);
+  //   formData.append('rating_quantity', foodAmountRate);
+  //   formData.append('rating_delivery', deliveryRate);
+  //   files.forEach((f, index) => {
+  //     formData.append('review_images', f);
+  //   });
+  //   // formData.append('review_images', files);
+  //   // formData.append('review_images', 'djfadfjkasdjl');
+  //   console.log(formData.get('comment'));
+  //   console.log(formData.has('review_images'));
+  //   console.log(files);
+  //   console.log(formData.getAll('review_images'));
+
+  //   await api.post(`/restaurants/api/${storeId}/review/`, formData);
+
+  //   history.push(`/store/${storeId}`);
   // }
 
   handleTasteRateChange(e) {
@@ -83,6 +110,7 @@ class ReviewForm extends Component {
 
   render() {
     const rating = [1, 2, 3, 4, 5];
+
     const {
       tasteRate,
       foodAmountRate,
@@ -90,27 +118,25 @@ class ReviewForm extends Component {
 
       files,
     } = this.state;
+    console.log(files);
 
     return (
       <div className="ReviewForm">
         <form
+          // encType="multipart/form-data"
           className="ReviewForm__form"
           onSubmit={e => {
             e.preventDefault();
 
             const body = e.target.elements.body.value;
-            const { files } = this.state;
-            const formData = new FormData();
 
-            files.forEach((f, index) => {
-              formData.append(`file${index}`, f);
-            });
-
-            this.props.onSubmit(body, tasteRate, foodAmountRate, deliveryRate);
-
-            // formData
-
-            console.log(files);
+            this.props.onSubmit(
+              body,
+              tasteRate,
+              foodAmountRate,
+              deliveryRate,
+              files
+            );
           }}
         >
           <div className="ReviewForm__form__rates">
@@ -158,7 +184,12 @@ class ReviewForm extends Component {
           </label>
           <textarea
             className="ReviewForm__form__comments"
-            onChange={e => this.handleTextCount(e)}
+            onChange={e => {
+              this.setState({
+                body: e.target.value,
+              });
+              this.handleTextCount(e);
+            }}
             id="reviewText"
             name="body"
             cols="30"
