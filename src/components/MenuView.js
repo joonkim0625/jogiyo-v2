@@ -108,6 +108,7 @@ class MenuView extends Component {
         </div>
 
         <ModalContainer
+          updateCart={this.props.updateCart}
           pullCartItem={this.props.pullCartItem}
           show={this.state.show}
           handleClose={this.handleHideModal}

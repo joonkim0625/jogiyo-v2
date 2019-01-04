@@ -46,6 +46,7 @@ export default class Menu extends Component {
           rest={rest}
           info={info}
           key={this.state.cart.length}
+          updateCart={this.props.updateCart}
           pullCartItem={this.props.pullCartItem}
           loading={loading}
         />

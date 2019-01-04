@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './CartView.scss';
+import './SideCartView.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStore } from '@fortawesome/free-solid-svg-icons';
-import withLoading from '../hoc/WithLoading';
 
-export default class CartView extends Component {
+export default class SideCartView extends Component {
   static defaultProps = {
     orderList: [],
   };
@@ -45,17 +44,6 @@ export default class CartView extends Component {
     this.state = {
       foodInCart,
     };
-  }
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.orderList !== prevProps.orderList) {
-      this.setState({
-        orderList: this.props.orderList,
-      });
-    }
   }
 
   handleToMenu() {
@@ -103,21 +91,24 @@ export default class CartView extends Component {
     } = productInCart;
 
     return (
-      <div key={id} className="Cart__orders__item">
-        <h4 className="Cart__orders__item__name">{name}</h4>
-        <div className="Cart__orders__item__box">
+      <div key={id} className="SideCart__orders__item">
+        <h4 className="SideCart__orders__item__name">{name}</h4>
+        <div className="SideCart__orders__item__box">
           {/* key로 준 id값을 온클릭 할 때의 매개변수 */}
           <button
-            className="Cart__orders__item__delete"
-            onClick={() => this.props.handleDelete(id)}
+            className="SideCart__orders__item__delete"
+            onClick={() => {
+              this.props.handleDelete(id);
+              this.props.updateCart();
+            }}
           >
             삭제
           </button>
 
-          <span className="Cart__orders__item__price">
+          <span className="SideCart__orders__item__price">
             {(price * quantity).toLocaleString()}원
           </span>
-          <div className="Cart__orders__item__quantity">
+          <div className="SideCart__orders__item__quantity">
             <button
               onClick={e =>
                 this.handleQuantityMinus(parseInt(id), parseInt(price))
@@ -147,13 +138,16 @@ export default class CartView extends Component {
     // console.log(this.props.orderList);
     console.log(foodInCart);
     return (
-      <div className="Cart">
-        <div className="Cart__header">
-          <h1 className="Cart__header__title">주문표</h1>
+      <div className="SideCart">
+        <div className="SideCart__header">
+          <h1 className="SideCart__header__title">주문표</h1>
           {cartLength > 0 ? (
             <button
-              onClick={() => this.props.handleDeleteAll()}
-              className="Cart__header__all-delete"
+              onClick={() => {
+                this.props.handleDeleteAll();
+                this.props.updateCart();
+              }}
+              className="SideCart__header__all-delete"
             >
               <FontAwesomeIcon icon={faTrashAlt} color={'white'} />
             </button>
@@ -162,9 +156,9 @@ export default class CartView extends Component {
           {/* 아이콘은 foodInCart의 length가 0이면 없고 0보다 크면 나타난다 */}
         </div>
         {/* -------------------------------- */}
-        <div className="Cart__orders">
+        <div className="SideCart__orders">
           {cartLength > 0 ? (
-            <h3 className="Cart__orders__store">
+            <h3 className="SideCart__orders__store">
               <FontAwesomeIcon icon={faStore} />
 
               {foodInCart[0].storeName}
@@ -175,24 +169,24 @@ export default class CartView extends Component {
               {foodInCart.map(f => this.renderItem(f))}
             </div>
           ) : (
-            <div className="Cart__orders__empty">
+            <div className="SideCart__orders__empty">
               주문표에 담긴 메뉴가 없습니다.
             </div>
           )}
         </div>
         {/* foodInCart[0] -> 이렇게 표시한 이유는 그냥 첫번째 배열의 배달값만 가져오면 되기 때문  */}
         {cartLength > 0 ? (
-          <div className="Cart__delivery_fee">
+          <div className="SideCart__delivery_fee">
             배달료 : {foodInCart[0].deliveryFee.toLocaleString()}원
           </div>
         ) : null}
         {cartLength > 0 ? (
-          <div className="Cart__min_price">
+          <div className="SideCart__min_price">
             최소주문가격 : {foodInCart[0].minAmount.toLocaleString()}원
           </div>
         ) : null}
         {cartLength > 0 ? (
-          <div className="Cart__sum">
+          <div className="SideCart__sum">
             합계 :
             {foodInCart
               .reduce((acc, item) => acc + item.totalPrice, 0)
@@ -204,24 +198,8 @@ export default class CartView extends Component {
         {/* 누르면 매장으로 */}
         <div
           className="
-        Cart__btn"
+        SideCart__btn"
         >
-          {cartLength > 0 ? (
-            <Link to={`/store/${foodInCart[0].storeId}`}>
-              <button
-                onClick={() => {
-                  this.handleToMenu();
-                }}
-              >
-                메뉴 추가하기
-              </button>
-            </Link>
-          ) : (
-            <Link to="/">
-              <button>홈으로 가기</button>
-            </Link>
-          )}
-
           {/* 주문 창으로 */}
           {/* 배열의 길이가 0이면 기능이 작동 안됨. */}
           {/* 세션에 마지막으로 수정된 사항을 저장하기  */}
@@ -232,7 +210,7 @@ export default class CartView extends Component {
               <button onClick={() => this.handleToPay()}>주문하기</button>
             </Link>
           ) : (
-            <Link to="#none" id="Cart__btn-disabled">
+            <Link to="#none" id="SideCart__btn-disabled">
               <button disabled>주문하기</button>
             </Link>
           )}

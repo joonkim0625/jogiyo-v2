@@ -36,7 +36,6 @@ export default class Modal extends Component {
   }
   handleKeyPress(e) {
     if (e.keyCode === 27) {
-      console.log('ACTIVe');
       this.handleModalClose();
     }
   }
@@ -84,7 +83,6 @@ export default class Modal extends Component {
       deliveryFee,
       history,
     } = this.props;
-    console.log(this.props);
 
     const { quantity } = this.state;
 
@@ -159,6 +157,7 @@ export default class Modal extends Component {
                     minAmount,
                     deliveryFee
                   );
+                  // this.props.updateCart();
                   this.props.pullCartItem();
                   this.handleQuantityReset();
                 }}

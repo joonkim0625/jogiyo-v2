@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CartView from '../components/CartView';
+import SideCartView from '../components/SideCartView';
 
 export default class Cart extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ export default class Cart extends Component {
 
     newOrderList.splice(currentIndex, 1);
 
-    this.setState({ orderList: newOrderList, loading: false });
+    this.setState({ orderList: newOrderList });
 
     sessionStorage.setItem('cart', JSON.stringify(newOrderList));
   }
@@ -58,18 +58,18 @@ export default class Cart extends Component {
   }
 
   // 모두 삭제도 필요 -> 이것도 역시 view에서의 상태조작일 것이기 때문에
-  async handleDeleteAll() {
+  handleDeleteAll() {
     let newOrderList = this.state.orderList;
     newOrderList.splice(0, newOrderList.length);
     this.setState({ orderList: newOrderList });
     sessionStorage.setItem('cart', JSON.stringify(newOrderList));
-    this.setState({ loading: false });
   }
 
   render() {
     console.log(this.state.orderList);
     return (
-      <CartView
+      <SideCartView
+        updateCart={this.props.updateCart}
         orderList={this.state.orderList}
         handleAddMenu={this.handleAddMenu}
         handleToPay={this.handleToPay}
