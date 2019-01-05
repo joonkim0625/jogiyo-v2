@@ -54,6 +54,7 @@ class ReviewForm extends Component {
     }
     console.log(this.state.files);
   }
+
   // async handleImgSubmit() {
   //   const { storeId } = this.props;
   //   const { files } = this.state;
@@ -223,6 +224,7 @@ class ReviewForm extends Component {
           >
             이미지 선택
           </button>
+
           <div className="ReviewForm__image-preview">
             {files.map((f, index) => (
               <ImagePreview file={f} key={index} />

@@ -31,7 +31,7 @@ export default class StoreDetail extends Component {
       ratingDeliveryAvg: 0,
       ratingQuantityAvg: 0,
       ratingTasteAvg: 0,
-      // cart: JSON.parse(sessionStorage.cart),
+      cart: JSON.parse(sessionStorage.cart),
       cartLength: JSON.parse(sessionStorage.cart).reduce(
         (acc, item) => acc + item.quantity,
         0
@@ -39,6 +39,7 @@ export default class StoreDetail extends Component {
       reviewLength: 0,
     };
     this.updateReviewLength = this.updateReviewLength.bind(this);
+    this.handleUpdateCart = this.handleUpdateCart.bind(this);
   }
   reviewStar(count) {
     const num = Math.floor(count);
@@ -60,7 +61,6 @@ export default class StoreDetail extends Component {
 
     this.setState({
       ...storeInfo,
-
       reviewLength: review.length,
     });
   }
@@ -72,6 +72,12 @@ export default class StoreDetail extends Component {
     );
     this.setState({
       reviewLength: review.length,
+    });
+  }
+
+  handleUpdateCart() {
+    this.setState({
+      cart: JSON.parse(sessionStorage.cart),
     });
   }
 
@@ -92,9 +98,11 @@ export default class StoreDetail extends Component {
         <StoreDetailView
           {...this.state}
           id={storeId}
+          updateCart={this.handleUpdateCart}
           pullCartItem={this.pullCartItem}
           reviewStar={this.reviewStar.bind(this)}
           updateReviewLength={this.updateReviewLength}
+          key={this.state.cartLength}
         />
       </div>
     );

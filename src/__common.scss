@@ -17,7 +17,7 @@ $btn-gray: #ccc;
 
 @mixin breakpoint($breakpoint) {
   @if $breakpoint == 'mobile' {
-    @media (min-width: 320px) and (max-width: 767px) {
+    @media (min-width: 0px) and (max-width: 767px) {
       @content;
     }
   } @else if $breakpoint == 'tablet' {
