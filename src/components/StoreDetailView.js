@@ -278,12 +278,12 @@ class StoreDetailView extends Component {
               <button className="StoreDetail__btn__order">바로 주문하기</button>
             </Link>
           </div>
-          <SideCart
-            key={this.props.cart}
-            cart={this.props.cart}
-            updateCart={this.props.updateCart}
-          />
         </div>
+        <SideCart
+          key={this.props.cart}
+          cart={this.props.cart}
+          updateCart={this.props.updateCart}
+        />
       </div>
     );
   }

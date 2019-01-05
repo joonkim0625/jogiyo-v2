@@ -157,9 +157,10 @@ export default class Modal extends Component {
                     minAmount,
                     deliveryFee
                   );
-                  // this.props.updateCart();
+
                   this.props.pullCartItem();
                   this.handleQuantityReset();
+                  this.props.updateCart();
                 }}
               >
                 주문표에 추가

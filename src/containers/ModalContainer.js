@@ -165,6 +165,7 @@ class ModalContainer extends Component {
   }
 
   render() {
+    console.log(this.state.cart);
     return (
       <Modal
         updateCart={this.props.updateCart}
