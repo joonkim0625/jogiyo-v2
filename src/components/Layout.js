@@ -1,3 +1,5 @@
+import 'core-js';
+import '@babel/polyfill';
 import React, { Component } from 'react';
 import Hero from '../containers/Hero';
 import { Link } from 'react-router-dom';
