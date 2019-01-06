@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './App.css';
 import 'core-js';
 import '@babel/polyfill';
+import React, { Component } from 'react';
+import './App.css';
 
 import FoodCategoryPage from './pages/FoodCategoryPage';
 import { BrowserRouter, Route } from 'react-router-dom';
