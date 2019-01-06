@@ -152,7 +152,6 @@ export default class RegisterFormView extends Component {
                       value={phoneNumber}
                       placeholder="(필수)휴대폰 전화번호 입력(-제외)"
                       name="phoneNumber"
-                      required
                       onChange={e => this.handleFieldChange(e, 'phoneNumber')}
                     />
                     <span className="err-msg">휴대폰번호를 입력해주세요.</span>

@@ -17,6 +17,7 @@ class Register extends Component {
     };
   }
   async handleSubmit(e) {
+    const { history } = this.props;
     e.preventDefault();
     const username = e.target.elements.username.value;
     const password = e.target.elements.password.value;
@@ -30,6 +31,7 @@ class Register extends Component {
     this.setState({
       success: true,
     });
+    history.push('/login');
     console.log(username);
   }
 
