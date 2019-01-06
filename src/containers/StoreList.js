@@ -1,4 +1,4 @@
-import '@babel/polyfill';
+import 'url-search-params-polyfill';
 import React, { Component } from 'react';
 import StoreListView from '../components/StoreListView';
 import api from '../api';
