@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'core-js';
 import '@babel/polyfill';
 
 import FoodCategoryPage from './pages/FoodCategoryPage';
