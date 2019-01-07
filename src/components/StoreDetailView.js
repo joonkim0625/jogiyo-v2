@@ -20,7 +20,7 @@ class StoreDetailView extends Component {
     name: '',
     minOrderAmount: 0,
     reviewAvg: 0,
-    logoUrl: '',
+    logo_url: '',
     reviewCount: 0,
     begin: '',
     end: '',
@@ -107,7 +107,7 @@ class StoreDetailView extends Component {
       minOrderAmount,
       reviewAvg,
       reviewCount,
-      logoUrl,
+      logo_url,
       id,
       begin,
       end,
@@ -137,7 +137,7 @@ class StoreDetailView extends Component {
               {/* 로고 이미지 설정 참고 */}
               {/* 이미지를 왼쪽에 위치시키고 나머지는 디스플레이 : 블록 으로? */}
               <div className="StoreDetail__info__logo">
-                <img src={logoUrl} alt={name} />
+                <img src={logo_url} alt={name} />
               </div>
               <div className="StoreDetail__info__text">
                 <p className="StoreDetail__info__text__star">

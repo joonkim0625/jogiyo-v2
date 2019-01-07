@@ -98,7 +98,7 @@ class StoreListView extends Component {
             <li className="StoreList__item" key={l.id}>
               <Link to={`/store/${l.id}`}>
                 <div className="StoreList__img">
-                  <img src={l.logoUrl} alt={l.name} />
+                  <img src={l.logo_url} alt={l.name} />
                 </div>
                 <h1 className="StoreList__name">{l.name}</h1>
                 <div className="StoreList__info-wrap">
