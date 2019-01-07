@@ -102,15 +102,15 @@ class StoreListView extends Component {
                 </div>
                 <h1 className="StoreList__name">{l.name}</h1>
                 <div className="StoreList__info-wrap">
-                  {l.reviewAvg <= 0 ? (
+                  {l.review_avg <= 0 ? (
                     <span>첫 리뷰를 남겨주세요 !</span>
                   ) : (
                     <React.Fragment>
                       <span className="StoreList__star">
-                        ★ {parseFloat(l.reviewAvg).toFixed(1)}
+                        ★ {parseFloat(l.review_avg).toFixed(1)}
                       </span>
                       <span className="StoreList__review">
-                        리뷰 {l.reviewCount}
+                        리뷰 {l.review_count}
                       </span>
                     </React.Fragment>
                   )}
@@ -118,17 +118,17 @@ class StoreListView extends Component {
                 <div className="StoreList__info-wrap">
                   <span className="StoreList__payment">요기서 결제</span>
                   <span className="StoreList__min-price">
-                    {l.minOrderAmount}원 이상 배달
+                    {l.min_order_amount}원 이상 배달
                   </span>
                 </div>
 
-                {l.additionalDiscountPerMenu ? (
+                {l.additional_discount_per_menu ? (
                   <p className="StoreList__delivery_discount">
-                    <span>배달할인 {l.additionalDiscountPerMenu}원</span>
+                    <span>배달할인 {l.additional_discount_per_menu}원</span>
                   </p>
                 ) : null}
                 <div className="StoreList__delivery-time">
-                  {l.estimatedDeliveryTime}
+                  {l.estimated_delivery_time}
                 </div>
                 {/* <div>
                 <span className="StoreList__delivery-discount">배달할인</span>

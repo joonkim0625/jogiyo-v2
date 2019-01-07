@@ -18,23 +18,23 @@ class StoreDetailView extends Component {
   static defaultProps = {
     id: null,
     name: '',
-    minOrderAmount: 0,
-    reviewAvg: 0,
+    min_order_amount: 0,
+    review_avg: 0,
     logo_url: '',
-    reviewCount: 0,
+    review_count: 0,
     begin: '',
     end: '',
-    companyName: '',
-    companyNumber: '',
-    countryOrigin: '',
-    introductionText: '',
-    estimatedDeliveryTime: '',
-    exceptCash: null,
-    paymentMethods: [],
-    deliveryFee: 0,
-    ratingDeliveryAvg: 0,
-    ratingQuantityAvg: 0,
-    ratingTasteAvg: 0,
+    company_name: '',
+    company_number: '',
+    country_origin: '',
+    introduction_text: '',
+    estimated_delivery_time: '',
+    except_cash: null,
+    payment_methods: [],
+    delivery_fee: 0,
+    rating_delivery_avg: 0,
+    rating_quantity_avg: 0,
+    rating_taste_avg: 0,
     cart: [],
     cartLength: 0,
     reviewLength: 0,
@@ -104,26 +104,26 @@ class StoreDetailView extends Component {
     const { infoShow } = this.state;
     const {
       name,
-      minOrderAmount,
-      reviewAvg,
-      reviewCount,
+      min_order_amount,
+      review_avg,
+      review_count,
       logo_url,
       id,
       begin,
       end,
-      companyName,
-      companyNumber,
-      countryOrigin,
-      introductionText,
-      estimatedDeliveryTime,
-      exceptCash,
-      paymentMethods,
-      deliveryFee,
-      additionalDiscountPerMenu,
-      ownerReplyCount,
-      ratingDeliveryAvg,
-      ratingQuantityAvg,
-      ratingTasteAvg,
+      company_name,
+      company_number,
+      country_origin,
+      introduction_text,
+      estimated_delivery_time,
+      except_cash,
+      payment_methods,
+      delivery_fee,
+      additional_discount_per_menu,
+      owner_reply_count,
+      rating_delivery_avg,
+      rating_quantity_avg,
+      rating_taste_avg,
 
       reviewLength,
     } = this.props;
@@ -141,16 +141,17 @@ class StoreDetailView extends Component {
               </div>
               <div className="StoreDetail__info__text">
                 <p className="StoreDetail__info__text__star">
-                  <span>{reviewStar(reviewAvg)}</span>
-                  <span>{parseFloat(reviewAvg).toFixed(1)}</span>
+                  <span>{reviewStar(review_avg)}</span>
+                  <span>{parseFloat(review_avg).toFixed(1)}</span>
                 </p>
                 <p>
-                  최소주문금액 <span>{minOrderAmount.toLocaleString()}원</span>
+                  최소주문금액{' '}
+                  <span>{min_order_amount.toLocaleString()}원</span>
                 </p>
                 <p>
-                  결제 <span>{exceptCash ? '현금' : null}, </span>
+                  결제 <span>{except_cash ? '현금' : null}, </span>
                   <span>
-                    {paymentMethods.map(m => (
+                    {payment_methods.map(m => (
                       <span
                         className="StoreDetail__info__text__yogi"
                         key={m.id}
@@ -165,7 +166,7 @@ class StoreDetailView extends Component {
                   </span>
                 </p>
                 <div>
-                  배달시간 <span>{estimatedDeliveryTime}</span>
+                  배달시간 <span>{estimated_delivery_time}</span>
                   <div className="StoreDetail__info__text__btn">
                     <button
                       ref={node => {
@@ -183,10 +184,10 @@ class StoreDetailView extends Component {
                     ) : null}
                   </div>
                 </div>
-                {additionalDiscountPerMenu ? (
+                {additional_discount_per_menu ? (
                   <p>
                     <span className="StoreDetail__info__text__delivery_discount">
-                      배달할인 {additionalDiscountPerMenu}원
+                      배달할인 {additional_discount_per_menu}원
                     </span>
                   </p>
                 ) : null}
@@ -236,27 +237,27 @@ class StoreDetailView extends Component {
                     handleUserReviewPage={this.handleUserReviewPage.bind(this)}
                     updateReviewLength={this.props.updateReviewLength}
                     storeId={id}
-                    ownerReplyCount={ownerReplyCount}
+                    ownerReplyCount={owner_reply_count}
                     reviewStar={reviewStar}
-                    reviewAvg={reviewAvg}
-                    deliveryAvg={ratingDeliveryAvg}
-                    quantityAvg={ratingQuantityAvg}
-                    tasteAvg={ratingTasteAvg}
+                    reviewAvg={review_avg}
+                    deliveryAvg={rating_delivery_avg}
+                    quantityAvg={rating_quantity_avg}
+                    tasteAvg={rating_taste_avg}
                   />
                 ) : this.state.selected === 'store-info' ? (
                   <StoreInfo
                     storeId={id}
                     begin={begin}
                     end={end}
-                    companyName={companyName}
-                    companyNumber={companyNumber}
-                    countryOrigin={countryOrigin}
-                    introductionText={introductionText}
-                    estimatedDeliveryTime={estimatedDeliveryTime}
-                    deliveryFee={deliveryFee}
-                    paymentMethods={paymentMethods}
-                    exceptCash={exceptCash}
-                    minOrderAmount={minOrderAmount}
+                    companyName={company_name}
+                    companyNumber={company_number}
+                    countryOrigin={country_origin}
+                    introductionText={introduction_text}
+                    estimatedDeliveryTime={estimated_delivery_time}
+                    deliveryFee={delivery_fee}
+                    paymentMethods={payment_methods}
+                    exceptCash={except_cash}
+                    minOrderAmount={min_order_amount}
                   />
                 ) : null}
               </div>
