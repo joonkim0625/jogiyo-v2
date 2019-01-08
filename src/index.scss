@@ -176,3 +176,8 @@ input {
 #root {
   min-width: 360px;
 }
+
+_:-ms-fullscreen,
+:root button {
+  background-color: transparent;
+}
