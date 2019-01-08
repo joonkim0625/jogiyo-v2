@@ -1,4 +1,15 @@
 @import '../_common.scss';
+@media all and (-ms-high-contrast: none) {
+  *::-ms-backdrop,
+  .Layout__login-btn,
+  .Layout__register-btn,
+  .Layout___logout-btn {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 6px;
+    margin-left: 4px;
+  } /* IE11 */
+}
 
 .Layout__header {
   box-sizing: content-box;

@@ -117,7 +117,7 @@ class MenuView extends Component {
           name={this.state.foodName}
           price={this.state.foodPrice}
           storeId={info.id}
-          minAmount={info.minOrderAmount}
+          minAmount={info.min_order_amount}
           storeName={info.name}
         />
       </React.Fragment>
