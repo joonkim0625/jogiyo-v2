@@ -21,7 +21,7 @@
   &__address-input {
     border-radius: 4px 0 0 4px;
     margin-left: 8px;
-    min-width: calc(100% - 110px);
+    width: calc(100% - 110px);
     &:focus {
       outline: none;
     }

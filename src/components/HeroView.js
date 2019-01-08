@@ -16,7 +16,8 @@ class HeroView extends Component {
     console.log(this.state);
     const { findMyAddress } = this.props;
     const { addrShow } = this.props;
-    console.log(this.state.addrShowText);
+
+    // 지금은 kakaoAPI Context에서 실행되는 코드
     // let addrInput = JSON.parse(sessionStorage.getItem('addrString'));
 
     // let addrShow =
