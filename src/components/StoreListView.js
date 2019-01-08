@@ -33,11 +33,6 @@ class StoreListView extends Component {
       { id: 11, name: '카페/디저트' },
     ];
 
-    // console.log(categoryId);
-    // let btnTitle = category[categoryId - 1];
-    // console.log(categoryId);
-    // // console.log(btnTitle);
-    // console.log(category[categoryId - 1]);
     const item =
       category &&
       category.find(item => parseInt(item.id) === parseInt(categoryId));

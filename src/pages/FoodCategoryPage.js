@@ -9,7 +9,9 @@ import { withKakao } from '../contexts/kakaoApiContext';
 
 class FoodCategoryPage extends Component {
   render() {
-    const { click, addrShow } = this.props;
+    // 모바일에서 접속 시의 문제로 일단 기능을 주석 처리
+    // 초기 접속 시 gps 버튼이 눌리지 않으면 푸드 카테고리를 누를 수 없게 만드는 코드
+    // const { click, addrShow } = this.props;
 
     return (
       <Layout>

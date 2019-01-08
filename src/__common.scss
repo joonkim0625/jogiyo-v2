@@ -33,4 +33,10 @@ $btn-gray: #ccc;
       @content;
     }
   }
+
+  @if $breakpoint == 'minimum' {
+    @media (min-width: 0) and (max-width: 359px) {
+      @content;
+    }
+  }
 }
