@@ -6,6 +6,9 @@ import './LoginView.scss';
 import withLoading from '../hoc/WithLoading';
 
 class LoginView extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     const {
       handleLogin,

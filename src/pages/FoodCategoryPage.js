@@ -8,6 +8,9 @@ import './FoodCategoryPage.scss';
 import { withKakao } from '../contexts/kakaoApiContext';
 
 class FoodCategoryPage extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     // 모바일에서 접속 시의 문제로 일단 기능을 주석 처리
     // 초기 접속 시 gps 버튼이 눌리지 않으면 푸드 카테고리를 누를 수 없게 만드는 코드
@@ -22,37 +25,37 @@ class FoodCategoryPage extends Component {
             <Link className="FoodCategory__link--all" to="/category">
               전체 보기
             </Link>
-            <Link className="FoodCategory__link--alone" to="/category/8">
+            <Link className="FoodCategory__link--alone" to="/category/3">
               1인분 주문
             </Link>
-            <Link className="FoodCategory__link--franchise" to="/category/2">
+            <Link className="FoodCategory__link--franchise" to="/category/1">
               프랜차이즈
             </Link>
-            <Link className="FoodCategory__link--chicken" to="/category/4">
+            <Link className="FoodCategory__link--chicken" to="/category/2">
               치킨
             </Link>
-            <Link className="FoodCategory__link--pizza" to="/category/1">
+            <Link className="FoodCategory__link--pizza" to="/category/10">
               피자/양식
             </Link>
-            <Link className="FoodCategory__link--chinese" to="/category/7">
+            <Link className="FoodCategory__link--chinese" to="/category/4">
               중식
             </Link>
-            <Link className="FoodCategory__link--korean" to="/category/10">
+            <Link className="FoodCategory__link--korean" to="/category/7">
               한식
             </Link>
-            <Link className="FoodCategory__link--japanese" to="/category/12">
+            <Link className="FoodCategory__link--japanese" to="/category/9">
               일식/돈까스
             </Link>
-            <Link className="FoodCategory__link--pig" to="/category/3">
+            <Link className="FoodCategory__link--pig" to="/category/9">
               족발/보쌈
             </Link>
-            <Link className="FoodCategory__link--night" to="/category/9">
+            <Link className="FoodCategory__link--night" to="/category/5">
               야식
             </Link>
-            <Link className="FoodCategory__link--snack" to="/category/11">
+            <Link className="FoodCategory__link--snack" to="/category/8">
               분식
             </Link>
-            <Link className="FoodCategory__link--cafe" to="/category/5">
+            <Link className="FoodCategory__link--cafe" to="/category/11">
               카페/디저트
             </Link>
             {/* </> */}

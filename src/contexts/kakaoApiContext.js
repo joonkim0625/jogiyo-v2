@@ -57,10 +57,8 @@ export default class KakaoApiProvider extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state);
     console.log('카카오');
 
-    console.log(JSON.parse(sessionStorage.getItem('location')));
     const handleToSession = this.handleToSession;
 
     if (navigator.geolocation) {
