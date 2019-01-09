@@ -32,7 +32,6 @@ class Register extends Component {
       success: true,
     });
     history.push('/login');
-    console.log(username);
   }
 
   render() {
