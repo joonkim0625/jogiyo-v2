@@ -47,10 +47,8 @@ export default class UserProvider extends Component {
   async register({ ...value }) {
     const { username, password, phoneNumber, nickName } = value;
 
-    // 아마.. 이 db 구조로는 그냥 파람스 없이 요청한 다음에, 그 데이터를 find로 찾아서 매칭하는 아이디가 있는지 없는지를 걸러야 할 듯.
+    //  이 db 구조로는 그냥 파람스 없이 요청한 다음에, 그 데이터를 find로 찾아서 매칭하는 아이디가 있는지 없는지를 걸러야 할 까?
     // const userCheck = await api.get(`/members/api/user/${username}`);
-
-    // console.log(userCheck[0]);
 
     // 새로운 유저 인스턴스 생성
     await api.post('members/api/user/', {

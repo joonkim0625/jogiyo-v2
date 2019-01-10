@@ -17,12 +17,6 @@ export default class NewReviewForm extends Component {
     });
     await api.post(`/restaurants/api/${storeId}/review/`, formData);
 
-    // await api.post(`/restaurants/api/${storeId}/review/`, {
-    //   comment: body,
-    //   rating_delivery: deliveryRate,
-    //   rating_quantity: foodAmountRate,
-    //   rating_taste: tasteRate,
-    // });
     history.push(`/store/${storeId}`);
   }
   render() {

@@ -8,17 +8,6 @@ class Pay extends Component {
 
     this.state = {
       list: JSON.parse(sessionStorage.cart),
-      // 주문내역 가데이터
-      // list: {
-      //   store: '피자디아',
-      //   menu: ['콤비네이션피자(R)', '콜라(L)', '치즈오븐스파게티'],
-      //   price: 11000,
-      // },
-      // list: {
-      //   store: '',
-      //   menu: [],
-      //   price: 0,
-      // },
     };
   }
 

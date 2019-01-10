@@ -20,7 +20,6 @@ export default class Menu extends Component {
 
   async componentDidMount() {
     const { storeId } = this.props;
-    const { loading } = this.state;
 
     const { data: menu } = await api.get(
       '/restaurants/api/' + storeId + '/menu/'

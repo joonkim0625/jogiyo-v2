@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-// let location = JSON.parse(sessionStorage.getItem('location')) || {};
-
-// sessionStorage.setItem('location', JSON.stringify(location));
-
 const api = axios.create({
   headers: { Authorization: 'KakaoAK 1a72ca0688a79816a4a07debdf9bc661' },
 });
@@ -25,19 +21,11 @@ export default class KakaoApiProvider extends Component {
       addrString: {},
       addrShow: '',
       click: false,
-      // handleClick: this.handleClick.bind(this),
     };
     this.handleGpsClick = this.handleGpsClick.bind(this);
-    // this.handleSetGps = this.handleSetGps.bind(this);
 
     this.handleToSession = this.handleToSession.bind(this);
   }
-
-  // handleClick() {
-  //   this.setState({
-  //     click: true,
-  //   });
-  // }
 
   handleSetState = (longitude, latitude) => {
     this.setState({ locationX: longitude, locationY: latitude });
@@ -240,33 +228,6 @@ export default class KakaoApiProvider extends Component {
     });
   };
 
-  // *----------------------------------*
-  // handleSetGps = async () => {
-  //   const res2 = await api.get(
-  //     'https://dapi.kakao.com//v2/local/geo/coord2address.json',
-  //     {
-  //       params: {
-  //         x: this.state.locationX,
-  //         y: this.state.locationY,
-  //       },
-  //     }
-  //   );
-
-  //   const location = {
-  //     x: this.state.locationX,
-  //     y: this.state.locationY,
-  //   };
-  //   const addr = res2.data.documents[0].address;
-  //   const addrString = {
-  //     firstRegion: addr.region_1depth_name,
-  //     secondRegion: addr.region_2depth_name,
-  //     thirdRegion: addr.region_3depth_name,
-  //   };
-
-  //   sessionStorage.setItem('location', JSON.stringify(location));
-  //   sessionStorage.setItem('addrString', JSON.stringify(addrString));
-  //   this.setState({ addrString: JSON.parse(sessionStorage.addrString) });
-  // };
   render() {
     return <Provider value={this.state}>{this.props.children}</Provider>;
   }

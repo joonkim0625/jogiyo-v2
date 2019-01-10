@@ -4,7 +4,6 @@ import './CartView.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStore } from '@fortawesome/free-solid-svg-icons';
-import withLoading from '../hoc/WithLoading';
 
 export default class CartView extends Component {
   static defaultProps = {
@@ -13,7 +12,9 @@ export default class CartView extends Component {
   constructor(props) {
     super(props);
 
-    // CC의 상태를 공유한다고 보면 된다.
+    // props로부터 state를 계산해내고 싶은 경우, 생성자에서 해당 작업을 해주면 된다.
+    // 다만, props가 단 한번만 내려올 때만 이 방식이 가능하다.
+
     const { orderList } = props;
     const foodInCart = orderList.map(o => {
       const {
@@ -42,9 +43,7 @@ export default class CartView extends Component {
       };
     });
 
-    this.state = {
-      foodInCart,
-    };
+    this.state = { foodInCart };
   }
   componentDidMount() {
     window.scrollTo(0, 0);

@@ -6,7 +6,7 @@ let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
 sessionStorage.setItem('cart', JSON.stringify(cart));
 class ModalContainer extends Component {
-  // menuview에서 받을 prop들
+  // menuView에서 받을 prop들
   static defaultProps = {
     show: null,
     storeId: 0,
@@ -23,7 +23,7 @@ class ModalContainer extends Component {
     super(props);
 
     this.state = {
-      // 선생님은 여기서 세션스토라지에 담겨있는 것을 불러온 뒤, setState에서 cart값을 조정해서 넘겨주는 것 보다 배열을 하나 만들어서 사용한 뒤 최종적으로 넘겨주는 것이 더 낫다고 말하심
+      // 여기서 세션스토라지에 담겨있는 것을 불러온 뒤, setState에서 cart값을 조정해서 넘겨주는 것 보다 배열을 하나 만들어서 사용한 뒤 최종적으로 넘겨주는 것이 더 나은 방법
       cart: JSON.parse(sessionStorage.cart),
     };
     this.handleToPay = this.handleToPay.bind(this);
@@ -66,7 +66,7 @@ class ModalContainer extends Component {
     ) {
       cartArray = [];
       window.confirm(
-        "'다른 음식점에서 이미 담은 메뉴가 있습니다.담긴 메뉴를 취소하고 새로운 음식점에서 메뉴를 담을까요 ?"
+        '다른 음식점에서 이미 담은 메뉴가 있습니다.담긴 메뉴를 취소하고 새로운 음식점에서 메뉴를 담을까요 ?'
       );
     }
 
@@ -120,14 +120,13 @@ class ModalContainer extends Component {
     ) {
       cartArray = [];
       window.confirm(
-        "'다른 음식점에서 이미 담은 메뉴가 있습니다.담긴 메뉴를 취소하고 새로운 음식점에서 메뉴를 담을까요 ?"
+        '다른 음식점에서 이미 담은 메뉴가 있습니다.담긴 메뉴를 취소하고 새로운 음식점에서 메뉴를 담을까요 ?'
       );
     }
 
     // 음식 담기...
     if (this.checkFoodId(foodId)) {
-      // cartItem 을 cartArray로 바꿔봄, 혹은 selectedItem으로 바꿔봄
-      // 불필요한 코드가 매우 많았다... 당연히 지금 새로 생성한 배열의 id값을 찾아야 하는 것이기에 cartArray의 인덱스 값을 찾는다.
+      //  지금 새로 생성한 배열의 id값을 찾아야 하는 것이기에 cartArray의 인덱스 값을 찾는다.
       let foodIndex = cartArray.findIndex(i => {
         return i.id === foodId;
       });

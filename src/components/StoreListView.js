@@ -125,10 +125,6 @@ class StoreListView extends Component {
                 <div className="StoreList__delivery-time">
                   {l.estimated_delivery_time}
                 </div>
-                {/* <div>
-                <span className="StoreList__delivery-discount">배달할인</span>
-                <span className="StoreList__coupon-discount">추가할인</span>
-              </div> */}
               </Link>
             </li>
           ))}

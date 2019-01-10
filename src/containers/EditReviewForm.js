@@ -23,9 +23,6 @@ export default class EditReviewForm extends Component {
         rating_quantity,
         rating_delivery,
         review_images,
-        // prop으로 이미 받아서.. 밑의 2가지가 필요할까?
-        // restaurant,
-        // user,
       },
     } = await api.get(`/restaurants/api/${storeId}/review/${postId}/`);
 
@@ -49,12 +46,7 @@ export default class EditReviewForm extends Component {
       formData.append('review_images', f);
     });
     await api.patch(`/restaurants/api/${storeId}/review/${postId}/`, formData);
-    // {
-    //   comment: body,
-    //     rating_taste: tasteRate,
-    //       rating_quantity: foodAmountRate,
-    //         rating_delivery: deliveryRate,
-    // }
+
     history.push(`/store/${storeId}`);
   }
 

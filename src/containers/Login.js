@@ -27,7 +27,6 @@ class Login extends Component {
 
       this.setState({
         success: true,
-        // loading: false,
       });
     } catch (e) {
       console.log('로그인 에러 남');

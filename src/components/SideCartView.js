@@ -12,7 +12,9 @@ export default class SideCartView extends Component {
   constructor(props) {
     super(props);
 
-    // CC의 상태를 공유한다고 보면 된다.
+    //  props로부터 state를 계산해내고 싶은 경우, 생성자에서 해당 작업을 해주면 된다.
+    // 다만, props가 단 한번만 내려올 때만 이 방식이 가능하다.
+
     const { orderList } = props;
     const foodInCart = orderList.map(o => {
       const {
@@ -41,9 +43,7 @@ export default class SideCartView extends Component {
       };
     });
 
-    this.state = {
-      foodInCart,
-    };
+    this.state = { foodInCart };
   }
 
   handleToMenu() {
@@ -130,7 +130,6 @@ export default class SideCartView extends Component {
     );
   }
 
-  // handleDelete... foodkey가 맞으면, 그건 없애버리기..
   render() {
     const { foodInCart, loading } = this.state;
     let cartLength = foodInCart.length;
@@ -152,10 +151,8 @@ export default class SideCartView extends Component {
               <FontAwesomeIcon icon={faTrashAlt} color={'white'} />
             </button>
           ) : null}
-          {/* <Link to='#'></Link> */}
-          {/* 아이콘은 foodInCart의 length가 0이면 없고 0보다 크면 나타난다 */}
         </div>
-        {/* -------------------------------- */}
+        {/* foodInCart[0] -> 이렇게 표시한 이유는 그냥 첫번째 배열의 배달값만 가져오면 되기 때문  */}
         <div className="SideCart__orders">
           {cartLength > 0 ? (
             <h3 className="SideCart__orders__store">
@@ -174,9 +171,8 @@ export default class SideCartView extends Component {
             </div>
           )}
         </div>
-        {/* foodInCart[0] -> 이렇게 표시한 이유는 그냥 첫번째 배열의 배달값만 가져오면 되기 때문  */}
         {cartLength > 0 ? (
-          <div className="SideCart__delivery_fee">
+          <div className="SideCart__deliveryㄴ_fee">
             배달료 : {foodInCart[0].deliveryFee.toLocaleString()}원
           </div>
         ) : null}
@@ -194,15 +190,11 @@ export default class SideCartView extends Component {
             원
           </div>
         ) : null}
-        {/* 배열의 길이가 0이면 홈으로 버튼 */}
-        {/* 누르면 매장으로 */}
+
         <div
           className="
         SideCart__btn"
         >
-          {/* 주문 창으로 */}
-          {/* 배열의 길이가 0이면 기능이 작동 안됨. */}
-          {/* 세션에 마지막으로 수정된 사항을 저장하기  */}
           {cartLength > 0 &&
           foodInCart.reduce((acc, item) => acc + item.totalPrice, 0) >
             foodInCart[0].minAmount ? (

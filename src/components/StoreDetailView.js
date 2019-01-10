@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './StoreDetailView.scss';
-import classNames from 'classnames';
+
 import { Link } from 'react-router-dom';
 
 import Menu from '../containers/Menu';
@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 import withLoading from '../hoc/WithLoading';
-import SideCartView from './SideCartView';
+
 import SideCart from '../containers/SideCart';
 
 class StoreDetailView extends Component {
@@ -195,8 +195,6 @@ class StoreDetailView extends Component {
             </div>
           </div>
 
-          {/* 3개 메뉴 셀렉트 */}
-          {/* 원산지 정보는 어디다 넣어야 할까...? */}
           <div className="StoreDetail__menu">
             <div className="StoreDetail__menu__select">
               <button
@@ -222,7 +220,7 @@ class StoreDetailView extends Component {
                 정보
               </button>
             </div>
-            {/* 컨텐츠 내용 양의 따라 늘어나야 한다 */}
+
             <div className="StoreDetail__menu__box">
               <div>
                 {this.state.selected === 'menu' ? (

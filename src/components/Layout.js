@@ -7,10 +7,9 @@ import logo from '../images/logo-yogiyo.png';
 import './Layout.scss';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { publicDecrypt } from 'crypto';
-import Login from '../containers/Login';
+
 import { withUser } from '../contexts/UserContext';
 import { withRouter } from 'react-router-dom';
 

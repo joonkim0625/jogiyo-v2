@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RegisterView from '../components/RegisterView';
-import api from '../api';
+
 import { withUser } from '../contexts/UserContext';
 
 class Register extends Component {

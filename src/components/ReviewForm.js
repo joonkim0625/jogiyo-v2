@@ -4,8 +4,6 @@ import ImagePreview from './ImagePreview';
 
 import './ReviewForm.scss';
 
-// 아무 상태의 변화가 없으면 함수형 컴포넌트로 생성해보자!
-// 근데 결국 점수의 변화를 담아 놓아야 하기 때문에... 클래스형으로 만들어야 한다.
 class ReviewForm extends Component {
   constructor(props) {
     super(props);
@@ -18,8 +16,6 @@ class ReviewForm extends Component {
       tasteRate: 1,
       foodAmountRate: 1,
       deliveryRate: 1,
-
-      // 이미지 업로드 관련
 
       files: [],
     };
@@ -54,44 +50,6 @@ class ReviewForm extends Component {
     }
     console.log(this.state.files);
   }
-
-  // async handleImgSubmit() {
-  //   const { storeId } = this.props;
-  //   const { files } = this.state;
-  //   const formData = new FormData();
-
-  //   files.forEach((f, index) => {
-  //     formData.append(`file${index}`, f);
-  //   });
-
-  //   await api.post(`/restaurants/api/${storeId}/review/`, {
-  //     review_images: formData,
-  //   });
-  // }
-  // async handleSubmit() {
-  //   // storeId를 프랍으로 받아와야 함
-  //   const { storeId, history } = this.props;
-  //   const { body, tasteRate, foodAmountRate, deliveryRate, files } = this.state;
-
-  //   const formData = new FormData();
-  //   formData.append('comment', body);
-  //   formData.append('rating_taste', tasteRate);
-  //   formData.append('rating_quantity', foodAmountRate);
-  //   formData.append('rating_delivery', deliveryRate);
-  //   files.forEach((f, index) => {
-  //     formData.append('review_images', f);
-  //   });
-  //   // formData.append('review_images', files);
-  //   // formData.append('review_images', 'djfadfjkasdjl');
-  //   console.log(formData.get('comment'));
-  //   console.log(formData.has('review_images'));
-  //   console.log(files);
-  //   console.log(formData.getAll('review_images'));
-
-  //   await api.post(`/restaurants/api/${storeId}/review/`, formData);
-
-  //   history.push(`/store/${storeId}`);
-  // }
 
   handleTasteRateChange(e) {
     this.setState({
@@ -195,9 +153,7 @@ class ReviewForm extends Component {
             name="body"
             cols="30"
             rows="10"
-            defaultValue={
-              this.props.body // 수정 버튼이 눌렸을 때 받는 body 값. edit할 때 넘어와야 한다
-            }
+            defaultValue={this.props.body}
             placeholder="사진과 함께 리뷰 작성 시 최대 100포인트 적립 가능! 음식에 대한 솔직한 리뷰를 남겨주세요.(10자이상)"
             minLength="10"
             maxLength="300"

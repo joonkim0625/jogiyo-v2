@@ -5,10 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons';
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 import { withRouter } from 'react-router-dom';
-import withLoading from '../hoc/WithLoading';
 
 class PayView extends Component {
   static defaultProps = {
@@ -18,29 +16,7 @@ class PayView extends Component {
   constructor(props) {
     super(props);
     const { list } = props;
-    // const foodInPay = list.map(l => {
-    //   const {
-    //     quantity,
-    //     id,
-    //     name,
-    //     storeName,
-    //     storeId,
-    //     ordered,
-    //     price,
-    //     deliveryFee,
-    //   } = l;
-    //   return {
-    //     id,
-    //     name,
-    //     quantity,
-    //     storeName,
-    //     price,
-    //     storeId,
-    //     ordered,
-    //     deliveryFee,
-    //     totalPrice: quantity * price,
-    //   };
-    // });
+
     this.state = { show: true, infoShow: false, list };
   }
   componentDidMount() {
@@ -167,21 +143,6 @@ class PayView extends Component {
                 <FontAwesomeIcon icon={faCoins} /> 현금
               </label>
             </div>
-            {/* 요기서 결제 숨김처리 */}
-            {/* <p className="Pay__info">
-              요기서 결제
-              <span className="Pay__info__side">웹에서 미리 결제</span>
-            </p>
-            <div className="Pay__payment__radio">
-              <input type="radio" name="payment" id="credit" disabled />
-              <label htmlFor="credit">
-                <FontAwesomeIcon icon={faCreditCard} /> 신용카드
-              </label>
-              <input type="radio" name="payment" id="cash" disabled />
-              <label htmlFor="cash">
-                <FontAwesomeIcon icon={faCoins} /> 현금
-              </label>
-            </div> */}
           </div>
           <div className="Pay__list">
             <div className="Menu">
@@ -217,53 +178,6 @@ class PayView extends Component {
                 </span>
               </li>
             </ul>
-            {/* <ul className="Pay__list__terms__listGroup">
-              <li className="Pay__list__terms__listGroup__item">
-                <div className="checkbox">
-                  <input type="checkbox" id="all" name="all" />
-                  <label htmlFor="all">전체동의</label>
-                </div>
-              </li>
-              <li className="Pay__list__terms__listGroup__item">
-                <div className="checkbox">
-                  <input type="checkbox" id="sms" name="sms" />
-                  <label htmlFor="sms">
-                    <span className="">SMS 수신 동의</span>
-                    <Link to="#">(전문보기)</Link>
-                  </label>
-                </div>
-              </li>
-              <li className="Pay__list__terms__listGroup__item">
-                <div className="checkbox">
-                  <input type="checkbox" id="userterms" name="userterms" />
-                  <label htmlFor="userterms">
-                    요기요 이용약관에 동의합니다.
-                    <Link to="#">(전문보기)</Link>
-                  </label>
-
-                  <input
-                    type="checkbox"
-                    id="personalInfo"
-                    name="personalInfo"
-                  />
-                  <label htmlFor="personalInfo">
-                    <span className="sj">
-                      개인정보 수집 및 이용에 동의합니다.
-                      <Link to="#">(전문보기)</Link>
-                    </span>
-                  </label>
-                </div>
-              </li>
-              <li className="Pay__list__terms__listGroup__item">
-                <div className="checkbox">
-                  <input type="checkbox" id="push" name="push" />
-                  <label htmlFor="push">
-                    개인정보 제3자 제공에 동의합니다.
-                    <Link to="#">(전문보기)</Link>
-                  </label>
-                </div>
-              </li>
-            </ul> */}
           </div>
           <button onClick={() => this.handleOrder()} className="Pay__order_btn">
             주문완료
