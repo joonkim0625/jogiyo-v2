@@ -196,7 +196,7 @@ export default class SideCartView extends Component {
         SideCart__btn"
         >
           {cartLength > 0 &&
-          foodInCart.reduce((acc, item) => acc + item.totalPrice, 0) >
+          foodInCart.reduce((acc, item) => acc + item.totalPrice, 0) >=
             foodInCart[0].minAmount ? (
             <Link to="/pay">
               <button onClick={() => this.handleToPay()}>주문하기</button>

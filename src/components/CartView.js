@@ -225,7 +225,7 @@ export default class CartView extends Component {
           {/* 배열의 길이가 0이면 기능이 작동 안됨. */}
           {/* 세션에 마지막으로 수정된 사항을 저장하기  */}
           {cartLength > 0 &&
-          foodInCart.reduce((acc, item) => acc + item.totalPrice, 0) >
+          foodInCart.reduce((acc, item) => acc + item.totalPrice, 0) >=
             foodInCart[0].minAmount ? (
             <Link to="/pay">
               <button onClick={() => this.handleToPay()}>주문하기</button>
