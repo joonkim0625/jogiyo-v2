@@ -45,8 +45,6 @@ export default class KakaoApiProvider extends Component {
   }
 
   componentDidMount() {
-    console.log('카카오');
-
     const handleToSession = this.handleToSession;
 
     if (navigator.geolocation) {
@@ -149,9 +147,7 @@ export default class KakaoApiProvider extends Component {
   //   // });
   // }
   async componentDidUpdate(prevState) {
-    console.log(this.state.locationX, this.state.locationY);
     if (this.state.locationIn === 0) {
-      console.log(prevState.locationX);
       console.log(this.state.locationX, this.state.locationY);
       const res = await api.get(
         'https://dapi.kakao.com//v2/local/geo/coord2address.json',
@@ -184,13 +180,11 @@ export default class KakaoApiProvider extends Component {
           addrInput.thirdRegion;
       sessionStorage.setItem('addrShow', JSON.stringify(addrShow));
     }
-    console.log(this.state.locationX, prevState.locationX);
-    console.log('업데이트 됨!');
   }
 
   handleGpsClick = async e => {
     e.preventDefault();
-    // console.log(this.state.locationX, this.state.locationY);
+
     const res2 = await api.get(
       'https://dapi.kakao.com//v2/local/geo/coord2address.json',
       {
