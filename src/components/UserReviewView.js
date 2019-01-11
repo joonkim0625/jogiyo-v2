@@ -25,7 +25,6 @@ class UserReviewView extends Component {
       user,
       handleUserReviewPage,
     } = this.props;
-    console.log(handleUserReviewPage);
 
     return (
       <div className="UserReview">

@@ -13,7 +13,6 @@ class HeroView extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { findMyAddress } = this.props;
     const { addrShow } = this.props;
 

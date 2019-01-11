@@ -134,8 +134,6 @@ export default class SideCartView extends Component {
     const { foodInCart, loading } = this.state;
     let cartLength = foodInCart.length;
 
-    // console.log(this.props.orderList);
-    console.log(foodInCart);
     return (
       <div className="SideCart">
         <div className="SideCart__header">

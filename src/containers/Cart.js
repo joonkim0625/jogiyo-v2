@@ -59,7 +59,6 @@ export default class Cart extends Component {
   }
 
   render() {
-    console.log(this.state.orderList);
     return (
       <CartView
         orderList={this.state.orderList}

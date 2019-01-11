@@ -143,8 +143,6 @@ export default class CartView extends Component {
     const { foodInCart, loading } = this.state;
     let cartLength = foodInCart.length;
 
-    // console.log(this.props.orderList);
-    console.log(foodInCart);
     return (
       <div className="Cart">
         <div className="Cart__header">

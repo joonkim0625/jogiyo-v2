@@ -56,7 +56,6 @@ export default class Cart extends Component {
   }
 
   render() {
-    console.log(this.state.orderList);
     return (
       <SideCartView
         updateCart={this.props.updateCart}

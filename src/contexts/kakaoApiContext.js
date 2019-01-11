@@ -40,7 +40,7 @@ export default class KakaoApiProvider extends Component {
       x: longitude,
       y: latitude,
     };
-    console.log(JSON.parse(sessionStorage.getItem('location')));
+
     sessionStorage.setItem('location', JSON.stringify(location));
   }
 
@@ -148,7 +148,6 @@ export default class KakaoApiProvider extends Component {
   // }
   async componentDidUpdate(prevState) {
     if (this.state.locationIn === 0) {
-      console.log(this.state.locationX, this.state.locationY);
       const res = await api.get(
         'https://dapi.kakao.com//v2/local/geo/coord2address.json',
         {
@@ -158,8 +157,7 @@ export default class KakaoApiProvider extends Component {
           },
         }
       );
-      console.log(res);
-      console.log(res.data);
+
       const location = { x: this.state.locationX, y: this.state.locationY };
       const addr = res.data.documents[0].address;
       const addrString = {

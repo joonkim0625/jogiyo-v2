@@ -32,12 +32,11 @@ export default class UserProvider extends Component {
         isLogin: true,
       });
     }
-    console.log(this.state);
   }
 
   async refreshUser() {
     const res2 = await api.get(`/members/api/user/me/`);
-    console.log(res2.data[0]);
+
     this.setState({
       id: res2.data[0].id,
       username: res2.data[0].username,

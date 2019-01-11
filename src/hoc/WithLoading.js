@@ -21,7 +21,7 @@ class WithLoading extends Component {
 export default function withLoading(Wrapped) {
   return function WithLoadings(props) {
     const { loading, ...rest } = props;
-    console.log(loading);
+
     if (loading) {
       return <WithLoading {...props} />;
     } else {

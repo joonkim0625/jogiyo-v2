@@ -9,7 +9,6 @@ class Hero extends Component {
   };
 
   render() {
-    console.log(this.state);
     const { handleGpsClick, addrShow } = this.props;
     return <HeroView findMyAddress={handleGpsClick} addrShow={addrShow} />;
   }

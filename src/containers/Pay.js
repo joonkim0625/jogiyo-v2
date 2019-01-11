@@ -12,7 +12,6 @@ class Pay extends Component {
   }
 
   render() {
-    console.log(this.state.list);
     const { list } = this.state;
     return (
       <div>

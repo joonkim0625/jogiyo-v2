@@ -23,9 +23,8 @@ export default class StoreList extends Component {
     const p = new URLSearchParams(this.props.location.search);
     const sortValue = p.get('sort');
     const location = JSON.parse(sessionStorage.getItem('location'));
-    console.log(location.x, location.y);
+
     const { categoryId } = this.props;
-    console.log(categoryId);
 
     if (categoryId == null) {
       const { data: storeList } = await api.get('restaurants/api/restaurant/', {
@@ -77,8 +76,7 @@ export default class StoreList extends Component {
   render() {
     const { storeList, category, selectValue, loading } = this.state;
     const { categoryId } = this.props;
-    console.log('스토어리스트');
-    console.log(storeList, selectValue);
+
     return (
       <StoreListView
         storeList={storeList}

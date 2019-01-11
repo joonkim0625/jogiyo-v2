@@ -48,7 +48,6 @@ class ReviewForm extends Component {
         files: [...prevState.files, ...e.target.files],
       }));
     }
-    console.log(this.state.files);
   }
 
   handleTasteRateChange(e) {
@@ -77,7 +76,6 @@ class ReviewForm extends Component {
 
       files,
     } = this.state;
-    console.log(files);
 
     return (
       <div className="ReviewForm">

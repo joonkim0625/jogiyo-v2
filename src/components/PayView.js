@@ -41,7 +41,6 @@ class PayView extends Component {
     const deliveryFee = list[0].deliveryFee ? list[0].deliveryFee : 0;
 
     let addrShow = JSON.parse(sessionStorage.getItem('addrShow'));
-    console.log(addrShow);
 
     return (
       <form className="Pay">
